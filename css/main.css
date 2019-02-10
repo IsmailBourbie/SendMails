@@ -1,0 +1,31 @@
+.navbar-inverse {
+  background: #222831;
+}
+.navbar-brand {
+    color: #00adb5 !important;
+}
+
+.main-form {
+  width: 60%;
+  margin: auto;
+}
+.main-form .inputs-group {
+  margin-bottom: 10px;
+}
+
+.main-form .receivers-inputs {
+  position: relative;
+}
+
+.main-form .receivers-inputs > div > span {
+  position: absolute;
+  right: 10px;
+  right: 25px;
+  top: 10px;
+}
+
+
+.main-form .receivers-inputs textarea.autosize {
+  resize: none;
+  overflow-y: hidden;
+}
