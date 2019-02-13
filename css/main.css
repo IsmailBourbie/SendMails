@@ -13,19 +13,23 @@
   margin-bottom: 10px;
 }
 
-.main-form .receivers-inputs {
+.main-form .inputs-has-icons {
   position: relative;
 }
 
-.main-form .receivers-inputs > div > span {
+.main-form .inputs-has-icons > div > span {
   position: absolute;
   right: 10px;
   right: 25px;
   top: 10px;
 }
 
+.main-form .body-title {
+  display: flex;
+  justify-content: space-between;
+}
 
-.main-form .receivers-inputs textarea.autosize {
+.main-form .inputs-has-icons textarea.autosize {
   resize: none;
   overflow-y: hidden;
 }
