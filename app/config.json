@@ -1,0 +1,12 @@
+{
+  "server_settings": {
+      "smtp_debug": 0,
+      "is_smtp": true,
+      "host": "smtp.example.com",
+      "smtp_auth": true,
+      "username": "user@example.com",
+      "password": "secret",
+      "smtp_secure": "ssl",
+      "smtp_port": 465
+    }
+}
