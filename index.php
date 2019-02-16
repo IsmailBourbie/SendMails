@@ -62,7 +62,7 @@
         <div class="inputs-group">
           <div class="body-title">
             <label>Body: *</label>
-            <a href="#" data-toggle="modal" data-target="#HtmlConfigModal"><!-- Button trigger modal -->
+            <a id="showHtmlModal" href="#" data-toggle="modal" data-target="#HtmlConfigModal" style="display: none"><!-- Button trigger modal -->
               Configuration
             </a>
           </div>
@@ -75,7 +75,7 @@
               <span>Or</span>
             </div>
             <div class="col-lg-6">
-              <input type="file" class="form-control" accept=".txt, .html, .htm">
+              <input id="chooseHtmlFile" type="file" class="form-control" accept=".txt, .html, .htm">
               <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="load text/html file"></span>
             </div>
           </div>
@@ -87,10 +87,10 @@
           <label style="display:block">Has Attachment:</label>
           <div class="row">
             <div class="col-lg-6">
-              <input type="radio" id="no" value="No" name="hasAttachment" checked> <label for="no" style="margin-right: 10px"> No</label>
-              <input type="radio" id="yes" value="Yes" name="hasAttachment"> <label for="yes"> Yes</label>
+              <input type="radio" id="no" value="no" name="hasAttachment" checked> <label for="no" style="margin-right: 10px"> No</label>
+              <input type="radio" id="yes" value="yes" name="hasAttachment"> <label for="yes"> Yes</label>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="display: none">
               <input type="file" class="form-control">
             </div>
           </div>
@@ -118,7 +118,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">HTML file configurations</h4>
+                <h4 class="modal-title" id="myModalLabel">File configurations</h4>
               </div>
               <div class="modal-body">
                 <!-- Images input start  -->
@@ -126,12 +126,12 @@
                   <label style="display:block">Has Images:</label>
                   <div class="row inputs-has-icons">
                     <div class="col-lg-3">
-                      <input type="radio" id="no_img" value="No" name="hasImages" checked> <label for="no_img" style="margin-right: 10px"> No</label>
-                      <input type="radio" id="yes_img" value="Yes" name="hasImages"> <label for="yes_img"> Yes</label>
+                      <input type="radio" id="no_img" value="no" name="hasImages" checked> <label for="no_img" style="margin-right: 10px"> No</label>
+                      <input type="radio" id="yes_img" value="yes" name="hasImages"> <label for="yes_img"> Yes</label>
                     </div>
-                    <div class="col-lg-9">
-                      <input type="text" class="form-control" placeholder="Enter CID:">
-                      <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="load text/html file"></span>
+                    <div class="col-lg-9" style="display: none">
+                      <input type="text" class="form-control" placeholder="Enter directory name:">
+                      <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="All images in this directory are included"></span>
                     </div>
                   </div>
                 </div>
@@ -142,15 +142,15 @@
                     <label style="display:block">Has Replaced Text:</label>
                     <div class="row inputs-has-icons">
                       <div class="col-lg-3">
-                        <input type="radio" id="no_replace" value="No" name="hasReplaced" checked> <label for="no_replace" style="margin-right: 10px"> No</label>
-                        <input type="radio" id="yes_replace" value="Yes" name="hasReplaced"> <label for="yes_replace"> Yes</label>
+                        <input type="radio" id="no_replace" value="no" name="hasReplaced" checked> <label for="no_replace" style="margin-right: 10px"> No</label>
+                        <input type="radio" id="yes_replace" value="yes" name="hasReplaced"> <label for="yes_replace"> Yes</label>
                       </div>
-                      <div class="col-lg-9">
+                      <div class="col-lg-9" style="display: none">
                         <div class="row">
                           <div class="col-lg-5">
                             <input type="text" class="form-control" placeholder="Enter key name">
                           </div>
-                          <div class="col-lg-2">
+                          <div class="col-lg-2 text-center">
                             <span>By</span>
                           </div>
                           <div class="col-lg-5">
