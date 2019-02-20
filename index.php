@@ -28,7 +28,7 @@
         <!-- Sender input start  -->
         <div class="inputs-group">
           <label>Sender: *</label>
-          <input type="text" class="form-control" placeholder="ex: bourbie@gmail.com">
+          <input id="sender" name="sender" type="text" class="form-control" placeholder="ex: bourbie@gmail.com">
         </div>
         <!-- Sender input end  -->
 
@@ -37,14 +37,14 @@
           <label>Receivers: *</label>
           <div class="row inputs-has-icons">
             <div class="col-lg-5">
-              <input type="text" class="form-control" placeholder="ex: bourbie@gmail.com">
+              <input id="receivers_inline" name="receivers_inline" type="text" class="form-control" placeholder="ex: bourbie@gmail.com">
               <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="you can use multiple adresses by use ';' as separations"></span>
             </div>
             <div class="col-lg-1 text-center" style="padding-top: 10px;">
               <span>Or</span>
             </div>
             <div class="col-lg-6">
-              <input type="file" class="form-control" accept=".json">
+              <input id="receivers_file" name="receivers_file" type="file" class="form-control" accept=".json">
               <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="load json file"></span>
             </div>
           </div>
@@ -54,7 +54,7 @@
         <!-- Subject input start  -->
         <div class="inputs-group">
           <label>Subject:</label>
-          <input type="text" class="form-control" placeholder="Enter Subject">
+          <input id="subject" name="subject" type="text" class="form-control" placeholder="Enter Subject">
         </div>
         <!-- Subject input end  -->
 
@@ -68,14 +68,14 @@
           </div>
           <div class="row inputs-has-icons">
             <div class="col-lg-5">
-              <textarea name="name" class="form-control autosize" cols="35" placeholder="Write a message..."></textarea>
+              <textarea id="body" name="body" class="form-control autosize" cols="35" placeholder="Write a message..."></textarea>
               <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="you can write direct message as txt format without any Configuration"></span>
             </div>
             <div class="col-lg-1 text-center" style="padding-top: 10px;">
               <span>Or</span>
             </div>
             <div class="col-lg-6">
-              <input id="chooseHtmlFile" type="file" class="form-control" accept=".txt, .html, .htm">
+              <input id="chooseHtmlFile" name="body_html" type="file" class="form-control" accept=".txt, .html, .htm">
               <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="load text/html file"></span>
             </div>
           </div>
@@ -91,7 +91,7 @@
               <input type="radio" id="yes" value="yes" name="hasAttachment"> <label for="yes"> Yes</label>
             </div>
             <div class="col-lg-6" style="display: none">
-              <input type="file" class="form-control">
+              <input id="attachment_file" name="attachment_file" type="file" class="form-control">
             </div>
           </div>
         </div>
@@ -130,7 +130,7 @@
                       <input type="radio" id="yes_img" value="yes" name="hasImages"> <label for="yes_img"> Yes</label>
                     </div>
                     <div class="col-lg-9" style="display: none">
-                      <input type="text" class="form-control" placeholder="Enter directory name:">
+                      <input id="images_dir" name="images_dir" type="text" class="form-control" placeholder="Enter directory name:">
                       <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="All images in this directory are included"></span>
                     </div>
                   </div>
@@ -148,13 +148,13 @@
                       <div class="col-lg-9" style="display: none">
                         <div class="row">
                           <div class="col-lg-5">
-                            <input type="text" class="form-control" placeholder="Enter key name">
+                            <input id="replaced_txt_key" name="replaced_txt_key" type="text" class="form-control" placeholder="Enter key name">
                           </div>
                           <div class="col-lg-2 text-center">
                             <span>By</span>
                           </div>
                           <div class="col-lg-5">
-                            <input type="text" class="form-control" placeholder="Enter values name">
+                            <input id="replaced_txt_val" name="replaced_txt_val" type="text" class="form-control" placeholder="Enter values name">
                           </div>
 
                         </div>

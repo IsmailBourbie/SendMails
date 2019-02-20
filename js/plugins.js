@@ -30,4 +30,46 @@ $(document).ready(function() {
         $('#showHtmlModal').fadeOut();
       }
     });
+
+
+    // send mails data using ajax
+    $('form').submit(function (e) {
+      e.preventDefault();
+      var inputs = {
+        'sender': $('#sender').val().trim(),
+        'receivers': "",
+        'subject': $('#subject').val().trim(),
+        'body': "",
+        'attachment': "",
+        'images_dir': "",
+        'replaced_txt': {
+          'key': "",
+          'val': ""
+        }
+      };
+      if($('#receivers_inline').val().trim() != "") {
+        inputs.receivers = $('#receivers_inline').val().trim();
+      }
+
+      if($('#receivers_file').val() != "") {
+        inputs.receivers = $('#receivers_file').prop('files')[0];
+      }
+      console.log(new FormData(this));
+      $.ajax({
+        'method': 'POST',
+        'url': 'app/index.php',
+        'dataType': 'json',
+        data:  new FormData(this),
+   contentType: false,
+         cache: false,
+   processData:false,
+
+      }).done(function (msg) {
+        console.log(msg);
+      });
+    });
+
+
+
+
 });
