@@ -28,28 +28,9 @@
         <!-- Sender input start  -->
         <div class="inputs-group">
           <label>Sender: *</label>
-          <input id="sender" name="sender" type="text" class="form-control" placeholder="ex: bourbie@gmail.com">
+          <input id="sender" name="sender" type="text" class="form-control" placeholder="e.g: bourbie@gmail.com">
         </div>
         <!-- Sender input end  -->
-
-        <!-- Receivers input start  -->
-        <div class="inputs-group">
-          <label>Receivers: *</label>
-          <div class="row inputs-has-icons">
-            <div class="col-lg-5">
-              <input id="receivers_inline" name="receivers_inline" type="text" class="form-control" placeholder="ex: bourbie@gmail.com">
-              <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="you can use multiple adresses by use ';' as separations"></span>
-            </div>
-            <div class="col-lg-1 text-center" style="padding-top: 10px;">
-              <span>Or</span>
-            </div>
-            <div class="col-lg-6">
-              <input id="receivers_file" name="receivers_file" type="file" class="form-control" accept=".json">
-              <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="load json file"></span>
-            </div>
-          </div>
-        </div>
-        <!-- Receivers input end  -->
 
         <!-- Subject input start  -->
         <div class="inputs-group">
@@ -57,6 +38,25 @@
           <input id="subject" name="subject" type="text" class="form-control" placeholder="Enter Subject">
         </div>
         <!-- Subject input end  -->
+
+        <!-- Receivers input start  -->
+        <div class="inputs-group">
+          <label>Receivers: *</label>
+            <div class="row  inputs-has-icons">
+              <div class="col-lg-4 inputType">
+                <input type="radio" id="inline" value="inline" name="receiversRadio" checked> <label for="inline" style="margin-right: 10px"> Inline</label>
+                <input type="radio" id="file" value="file" name="receiversRadio"> <label for="file"> File</label>
+              </div>
+              <div class="col-lg-8 inline">
+                <input id="receivers_inline" name="receivers_inline" type="text" class="form-control" placeholder="e.g: bourbie@gmail.com">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="you can use multiple adresses by use ';' as separations"></span>
+              </div>
+              <div class="col-lg-8 file" style="display : none">
+                <input id="receivers_file" name="receivers" type="text" class="form-control" placeholder="e.g: TempName/file.json">
+              </div>
+            </div>
+        </div>
+        <!-- Receivers input end  -->
 
         <!-- Mail Body input start  -->
         <div class="inputs-group">
@@ -66,16 +66,17 @@
               Configuration
             </a>
           </div>
-          <div class="row inputs-has-icons">
-            <div class="col-lg-5">
+          <div class="row  inputs-has-icons">
+            <div class="col-lg-4 inputType">
+              <input type="radio" id="inlineText" value="inline" name="bodyType" checked> <label for="inlineText" style="margin-right: 10px"> Text</label>
+              <input type="radio" id="htmlFile" value="file" name="bodyType"> <label for="htmlFile"> File</label>
+            </div>
+            <div class="col-lg-8 inline">
               <textarea id="body" name="body" class="form-control autosize" cols="35" placeholder="Write a message..."></textarea>
               <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="you can write direct message as txt format without any Configuration"></span>
             </div>
-            <div class="col-lg-1 text-center" style="padding-top: 10px;">
-              <span>Or</span>
-            </div>
-            <div class="col-lg-6">
-              <input id="chooseHtmlFile" name="body_html" type="file" class="form-control" accept=".txt, .html, .htm">
+            <div class="col-lg-8 file" style="display : none">
+              <input id="chooseHtmlFile" name="body_html" type="text" class="form-control" placeholder="e.g: TempName/file.html">
               <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="load text/html file"></span>
             </div>
           </div>

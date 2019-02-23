@@ -3,8 +3,13 @@
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
   header('Location: ../');
 }
-$t = file_get_contents($_FILES['receivers_file']['tmp_name']);
-die(var_dump($t));
+$t = json_decode(trim(file_get_contents($_FILES['receivers_file']['tmp_name'])));
+
+$t =  json_encode($t);
+$t = json_decode($t);
+die(var_dump($t[0]));
+die();
+die(var_dump(json_encode($t)));
 
 $inputs = [
   'sender' => "",

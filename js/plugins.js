@@ -17,14 +17,29 @@ $(document).ready(function() {
     $('input[type=radio]').change(function() {
       if(this.value == "yes"){
           $(this).parent().siblings(0).fadeIn();
-      } else {
+      } else if (this.value == "no") {
           $(this).parent().siblings(0).fadeOut();
       }
     });
 
+    $('.inputType > input[type=radio]').change(function() {
+      var changedElement = $(this).parent(),
+          receiversVal = this.value;
+          if(receiversVal == "file"){
+            console.log($(this).parent().siblings(".inline"));
+            changedElement.siblings(".inline").fadeOut(function () {
+                changedElement.siblings(".file").fadeIn();
+            });
+          } else if (receiversVal == "inline") {
+            changedElement.siblings(".file").fadeOut(function () {
+              changedElement.siblings(".inline").fadeIn();
+            });
+          }
+    });
+
     // show html config btn on html file selected
-    $("#chooseHtmlFile").change(function(){
-      if (this.value != '') {
+    $("input[name=bodyType]").change(function(){
+      if (this.value == 'file') {
         $('#showHtmlModal').fadeIn();
       } else {
         $('#showHtmlModal').fadeOut();
@@ -35,11 +50,12 @@ $(document).ready(function() {
     // send mails data using ajax
     $('form').submit(function (e) {
       e.preventDefault();
-      var inputs = {
+      var receivers_file = $('#receivers_file').val().trim(),
+        inputs = {
         'sender': $('#sender').val().trim(),
-        'receivers': "",
+        'receivers': $('#receivers_inline').val().trim(),
         'subject': $('#subject').val().trim(),
-        'body': "",
+        'body': $("#body").val().trim(),
         'attachment': "",
         'images_dir': "",
         'replaced_txt': {
@@ -47,22 +63,20 @@ $(document).ready(function() {
           'val': ""
         }
       };
-      if($('#receivers_inline').val().trim() != "") {
-        inputs.receivers = $('#receivers_inline').val().trim();
-      }
 
-      if($('#receivers_file').val() != "") {
-        inputs.receivers = $('#receivers_file').prop('files')[0];
+      if(receivers_file != "" && receivers_file.substring(receivers_file.lastIndexOf('.') + 1, receivers_file.length) == "json") {
+        inputs.receivers = receivers_file;
       }
-      console.log(new FormData(this));
+      console.log(inputs.receivers);
+      return false;
       $.ajax({
         'method': 'POST',
         'url': 'app/index.php',
         'dataType': 'json',
-        data:  new FormData(this),
-   contentType: false,
-         cache: false,
-   processData:false,
+        'data':  inputs,
+        'contentType': false,
+        'cache': false,
+        'processData':false,
 
       }).done(function (msg) {
         console.log(msg);
