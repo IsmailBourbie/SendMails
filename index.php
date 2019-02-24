@@ -44,15 +44,15 @@
           <label>Receivers: *</label>
             <div class="row  inputs-has-icons">
               <div class="col-lg-4 inputType">
-                <input type="radio" id="inline" value="inline" name="receiversRadio" checked> <label for="inline" style="margin-right: 10px"> Inline</label>
-                <input type="radio" id="file" value="file" name="receiversRadio"> <label for="file"> File</label>
+                <input type="radio" id="inline" value="inline" name="receiversType" checked> <label for="inline" style="margin-right: 10px"> Inline</label>
+                <input type="radio" id="file" value="file" name="receiversType"> <label for="file"> File</label>
               </div>
               <div class="col-lg-8 inline">
                 <input id="receivers_inline" name="receivers_inline" type="text" class="form-control" placeholder="e.g: bourbie@gmail.com">
                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="you can use multiple adresses by use ';' as separations"></span>
               </div>
               <div class="col-lg-8 file" style="display : none">
-                <input id="receivers_file" name="receivers" type="text" class="form-control" placeholder="e.g: TempName/file.json">
+                <input id="receivers_file" name="receivers" type="text" class="form-control tempName" placeholder="e.g: TempName/file.json">
               </div>
             </div>
         </div>
@@ -76,8 +76,7 @@
               <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="you can write direct message as txt format without any Configuration"></span>
             </div>
             <div class="col-lg-8 file" style="display : none">
-              <input id="chooseHtmlFile" name="body_html" type="text" class="form-control" placeholder="e.g: TempName/file.html">
-              <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="load text/html file"></span>
+              <input id="body_file" name="body_file" type="text" class="form-control tempName" placeholder="e.g: TempName/file.html">
             </div>
           </div>
         </div>
@@ -86,13 +85,14 @@
         <!-- Attachment input start  -->
         <div class="inputs-group">
           <label style="display:block">Has Attachment:</label>
-          <div class="row">
-            <div class="col-lg-6">
+          <div class="row inputs-has-icons">
+            <div class="col-lg-4 hasSomething">
               <input type="radio" id="no" value="no" name="hasAttachment" checked> <label for="no" style="margin-right: 10px"> No</label>
               <input type="radio" id="yes" value="yes" name="hasAttachment"> <label for="yes"> Yes</label>
             </div>
-            <div class="col-lg-6" style="display: none">
-              <input id="attachment_file" name="attachment_file" type="file" class="form-control">
+            <div class="col-lg-8" style="display: none">
+              <input id="attachment_file" name="attachment_file" type="text" class="form-control tempName" placeholder="e.g: TempName/file.pdf">
+              <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Use ';' to separate between files"></span>
             </div>
           </div>
         </div>
@@ -126,12 +126,12 @@
                 <div class="inputs-group">
                   <label style="display:block">Has Images:</label>
                   <div class="row inputs-has-icons">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 hasSomething">
                       <input type="radio" id="no_img" value="no" name="hasImages" checked> <label for="no_img" style="margin-right: 10px"> No</label>
                       <input type="radio" id="yes_img" value="yes" name="hasImages"> <label for="yes_img"> Yes</label>
                     </div>
                     <div class="col-lg-9" style="display: none">
-                      <input id="images_dir" name="images_dir" type="text" class="form-control" placeholder="Enter directory name:">
+                      <input id="images_temp" name="images_temp" type="text" class="form-control tempName" placeholder="Enter directory name:">
                       <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="All images in this directory are included"></span>
                     </div>
                   </div>
@@ -142,7 +142,7 @@
                   <div class="inputs-group">
                     <label style="display:block">Has Replaced Text:</label>
                     <div class="row inputs-has-icons">
-                      <div class="col-lg-3">
+                      <div class="col-lg-3 hasSomething">
                         <input type="radio" id="no_replace" value="no" name="hasReplaced" checked> <label for="no_replace" style="margin-right: 10px"> No</label>
                         <input type="radio" id="yes_replace" value="yes" name="hasReplaced"> <label for="yes_replace"> Yes</label>
                       </div>
@@ -163,7 +163,6 @@
                     </div>
                   </div>
                   <!-- Replaced input end  -->
-
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
