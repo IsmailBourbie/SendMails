@@ -24,11 +24,11 @@
         <h1>Send Mail</h1>
         <p class="lead">Send mails to multiple adresses automaticaly</p>
       </header>
-      <form class="main-form">
+      <form class="main-form" autocomplete="off">
         <!-- Sender input start  -->
         <div class="inputs-group">
           <label>Sender: *</label>
-          <input id="sender" name="sender" type="text" class="form-control" placeholder="e.g: bourbie@gmail.com">
+          <input id="sender" name="sender" type="email" class="form-control" placeholder="e.g: bourbie@gmail.com" required>
         </div>
         <!-- Sender input end  -->
 
@@ -48,8 +48,8 @@
                 <input type="radio" id="file" value="file" name="receiversType"> <label for="file"> File</label>
               </div>
               <div class="col-lg-8 inline">
-                <input id="receivers_inline" name="receivers_inline" type="text" class="form-control" placeholder="e.g: bourbie@gmail.com">
-                <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="you can use multiple adresses by use ';' as separations"></span>
+                <input id="receivers_inline" name="receivers_inline" type="email" class="form-control" placeholder="e.g: bourbie@gmail.com" required multiple>
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="you can use multiple adresses by use ',' as separations"></span>
               </div>
               <div class="col-lg-8 file" style="display : none">
                 <input id="receivers_file" name="receivers" type="text" class="form-control tempName" placeholder="e.g: TempName/file.json">
@@ -72,7 +72,7 @@
               <input type="radio" id="htmlFile" value="file" name="bodyType"> <label for="htmlFile"> File</label>
             </div>
             <div class="col-lg-8 inline">
-              <textarea id="body" name="body" class="form-control autosize" cols="35" placeholder="Write a message..."></textarea>
+              <textarea id="body" name="body" class="form-control autosize" cols="35" placeholder="Write a message..." required></textarea>
               <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="you can write direct message as txt format without any Configuration"></span>
             </div>
             <div class="col-lg-8 file" style="display : none">
@@ -112,66 +112,66 @@
           </div><!-- /.col-lg-6 -->
         </div><!-- /.row -->
         <!-- Form Buttons end  -->
-
-        <!-- Modal -->
-        <div class="modal fade" id="HtmlConfigModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">File configurations</h4>
-              </div>
+      </form>
+      <!-- Modal -->
+      <div class="modal fade" id="HtmlConfigModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop=static data-keyboard=false>
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="reset" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">File configurations</h4>
+            </div>
+            <form id="configForm" action="" method="post" autocomplete="off">
               <div class="modal-body">
-                <!-- Images input start  -->
-                <div class="inputs-group">
-                  <label style="display:block">Has Images:</label>
-                  <div class="row inputs-has-icons">
-                    <div class="col-lg-3 hasSomething">
-                      <input type="radio" id="no_img" value="no" name="hasImages" checked> <label for="no_img" style="margin-right: 10px"> No</label>
-                      <input type="radio" id="yes_img" value="yes" name="hasImages"> <label for="yes_img"> Yes</label>
-                    </div>
-                    <div class="col-lg-9" style="display: none">
-                      <input id="images_temp" name="images_temp" type="text" class="form-control tempName" placeholder="Enter directory name:">
-                      <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="All images in this directory are included"></span>
-                    </div>
+              <!-- Images input start  -->
+              <div class="inputs-group">
+                <label style="display:block">Has Images:</label>
+                <div class="row inputs-has-icons">
+                  <div class="col-lg-3 hasSomething">
+                    <input type="radio" id="no_img" value="no" name="hasImages" checked> <label for="no_img" style="margin-right: 10px"> No</label>
+                    <input type="radio" id="yes_img" value="yes" name="hasImages"> <label for="yes_img"> Yes</label>
+                  </div>
+                  <div class="col-lg-9" style="display: none">
+                    <input id="images_temp" name="images_temp" type="text" class="form-control tempName" placeholder="Enter directory name:">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="All images in this directory are included"></span>
                   </div>
                 </div>
-                <!-- Images input end  -->
+              </div>
+              <!-- Images input end  -->
 
-                  <!-- Images input start  -->
-                  <div class="inputs-group">
-                    <label style="display:block">Has Replaced Text:</label>
-                    <div class="row inputs-has-icons">
-                      <div class="col-lg-3 hasSomething">
-                        <input type="radio" id="no_replace" value="no" name="hasReplaced" checked> <label for="no_replace" style="margin-right: 10px"> No</label>
-                        <input type="radio" id="yes_replace" value="yes" name="hasReplaced"> <label for="yes_replace"> Yes</label>
-                      </div>
-                      <div class="col-lg-9" style="display: none">
-                        <div class="row">
-                          <div class="col-lg-5">
-                            <input id="replaced_txt_key" name="replaced_txt_key" type="text" class="form-control" placeholder="Enter key name">
-                          </div>
-                          <div class="col-lg-2 text-center">
-                            <span>By</span>
-                          </div>
-                          <div class="col-lg-5">
-                            <input id="replaced_txt_val" name="replaced_txt_val" type="text" class="form-control" placeholder="Enter values name">
-                          </div>
-
+                <!-- Images input start  -->
+                <div class="inputs-group">
+                  <label style="display:block">Has Replaced Text:</label>
+                  <div class="row inputs-has-icons">
+                    <div class="col-lg-3 hasSomething">
+                      <input type="radio" id="no_replace" value="no" name="hasReplaced" checked> <label for="no_replace" style="margin-right: 10px"> No</label>
+                      <input type="radio" id="yes_replace" value="yes" name="hasReplaced"> <label for="yes_replace"> Yes</label>
+                    </div>
+                    <div class="col-lg-9" style="display: none">
+                      <div class="row">
+                        <div class="col-lg-5">
+                          <input id="replaced_txt_key" name="replaced_txt_key" type="text" class="form-control" placeholder="Enter key name">
+                        <div class="col-lg-2 text-center">
+                        </div>
+                          <span>By</span>
+                        </div>
+                        <div class="col-lg-5">
+                          <input id="replaced_txt_val" name="replaced_txt_val" type="text" class="form-control" placeholder="Enter values name">
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!-- Replaced input end  -->
+                </div>
+                <!-- Replaced input end  -->
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="reset" class="btn btn-default">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
-      </form>
+      </div>
     </div>
     <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>

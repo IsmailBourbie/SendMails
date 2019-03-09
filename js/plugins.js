@@ -17,8 +17,10 @@ $(document).ready(function() {
     $('.hasSomething > input[type=radio]').change(function() {
       if(this.value == "yes"){
           $(this).parent().siblings(0).fadeIn();
+          $(this).parent().siblings(0).find('input').attr("required", true);
       } else if (this.value == "no") {
           $(this).parent().siblings(0).fadeOut();
+          $(this).parent().siblings(0).find('input').attr("required", false);
       }
     });
 
@@ -28,10 +30,14 @@ $(document).ready(function() {
           if(receiversVal == "file"){
             changedElement.siblings(".inline").fadeOut(function () {
                 changedElement.siblings(".file").fadeIn();
+                changedElement.siblings(".file").children('input').attr("required", true);
+                changedElement.siblings(".inline").children('input').attr("required", false);
             });
           } else if (receiversVal == "inline") {
             changedElement.siblings(".file").fadeOut(function () {
               changedElement.siblings(".inline").fadeIn();
+              changedElement.siblings(".inline").children('input').attr("required", true);
+              changedElement.siblings(".file").children('input').attr("required", false);
             });
           }
     });
@@ -57,6 +63,15 @@ $(document).ready(function() {
             }
           });
       }
+    });
+
+    $('#configForm').submit(function(e){
+      e.preventDefault();
+      $('#HtmlConfigModal').modal('hide');
+    });
+    $('#configForm').on('reset',function(e){
+      $(this).find('input[value=no]').click();
+      $('#HtmlConfigModal').modal('hide');
     });
 
     // send mails data using ajax

@@ -13,18 +13,18 @@
   margin-bottom: 10px;
 }
 
-.main-form .inputs-has-icons {
+form .inputs-has-icons {
   position: relative;
 }
 
-.main-form .inputs-has-icons > div > span {
+form .inputs-has-icons > div > span {
   position: absolute;
   right: 10px;
   right: 25px;
   top: 10px;
 }
 
-.main-form .body-title {
+form .body-title {
   display: flex;
   justify-content: space-between;
 }
