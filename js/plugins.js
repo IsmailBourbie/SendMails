@@ -17,10 +17,10 @@ $(document).ready(function() {
     $('.hasSomething > input[type=radio]').change(function() {
       if(this.value == "yes"){
           $(this).parent().siblings(0).fadeIn();
-          $(this).parent().siblings(0).find('input').attr("required", true);
+          $(this).parent().siblings(0).children('input').attr("required", true);
       } else if (this.value == "no") {
           $(this).parent().siblings(0).fadeOut();
-          $(this).parent().siblings(0).find('input').attr("required", false);
+          $(this).parent().siblings(0).children('input').attr("required", false);
       }
     });
 
@@ -30,14 +30,14 @@ $(document).ready(function() {
           if(receiversVal == "file"){
             changedElement.siblings(".inline").fadeOut(function () {
                 changedElement.siblings(".file").fadeIn();
-                changedElement.siblings(".file").children('input').attr("required", true);
-                changedElement.siblings(".inline").children('input').attr("required", false);
+                changedElement.siblings(".file").children('input, textarea').attr("required", true);
+                changedElement.siblings(".inline").children('input, textarea').attr("required", false);
             });
           } else if (receiversVal == "inline") {
             changedElement.siblings(".file").fadeOut(function () {
               changedElement.siblings(".inline").fadeIn();
-              changedElement.siblings(".inline").children('input').attr("required", true);
-              changedElement.siblings(".file").children('input').attr("required", false);
+              changedElement.siblings(".inline").children('input, textarea').attr("required", true);
+              changedElement.siblings(".file").children('input, textarea').attr("required", false);
             });
           }
     });
@@ -75,13 +75,15 @@ $(document).ready(function() {
     });
 
     // send mails data using ajax
-    $('form').submit(function (e) {
+    $('form.main-form').submit(function (e) {
       e.preventDefault();
       var receivers_file = $('#receivers_file').val().trim(),
           body_file = $('#body_file').val().trim(),
           inputs = {
             'sender': $('#sender').val().trim(),
             'subject': $('#subject').val().trim(),
+            'receivers_type': $("input[name=receiversType]:checked").val(),
+            'body_type': $("input[name=bodyType]:checked").val(),
           };
       // check for type of inputs:
       // receivers_file
@@ -97,18 +99,13 @@ $(document).ready(function() {
       // there is images
       if ($("input[name=hasImages]:checked").val() == "yes") {inputs.images_temp = $("#images_temp").val().trim();}
       // there is reeplaced text
-      if ($("input[name=hasReplaced]:checked").val() == "yes") {inputs.replaced_txt.key = $("#replaced_txt_key").val().trim(); inputs.replaced_txt.val = $("#replaced_txt_val").val().trim();}
-      console.log(inputs);
-      return false;
+      if ($("input[name=hasReplaced]:checked").val() == "yes") {inputs.replaced_txt = $("#replaced_txt").val().trim();}
+
       $.ajax({
         'method': 'POST',
         'url': 'app/index.php',
         'dataType': 'json',
-        'data':  new FormData(this),
-        'contentType': false,
-        'cache': false,
-        'processData':false,
-
+        'data':  inputs,
       }).done(function (msg) {
         console.log(msg);
       });

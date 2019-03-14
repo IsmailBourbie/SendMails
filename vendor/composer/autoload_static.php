@@ -20,11 +20,16 @@ class ComposerStaticInit6934c0805a0de61bf84b5c8e9893e613
         ),
     );
 
+    public static $fallbackDirsPsr4 = array (
+        0 => __DIR__ . '/../..' . '/app',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit6934c0805a0de61bf84b5c8e9893e613::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit6934c0805a0de61bf84b5c8e9893e613::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit6934c0805a0de61bf84b5c8e9893e613::$fallbackDirsPsr4;
 
         }, null, ClassLoader::class);
     }

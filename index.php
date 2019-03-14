@@ -24,7 +24,7 @@
         <h1>Send Mail</h1>
         <p class="lead">Send mails to multiple adresses automaticaly</p>
       </header>
-      <form class="main-form" autocomplete="off">
+      <form class="main-form" autocomplete="off" method="post" action="app/index.php">
         <!-- Sender input start  -->
         <div class="inputs-group">
           <label>Sender: *</label>
@@ -49,7 +49,7 @@
               </div>
               <div class="col-lg-8 inline">
                 <input id="receivers_inline" name="receivers_inline" type="email" class="form-control" placeholder="e.g: bourbie@gmail.com" required multiple>
-                <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="you can use multiple adresses by use ',' as separations"></span>
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="you can use multiple adresses by using <,> as separations"></span>
               </div>
               <div class="col-lg-8 file" style="display : none">
                 <input id="receivers_file" name="receivers" type="text" class="form-control tempName" placeholder="e.g: TempName/file.json">
@@ -92,7 +92,7 @@
             </div>
             <div class="col-lg-8" style="display: none">
               <input id="attachment_file" name="attachment_file" type="text" class="form-control tempName" placeholder="e.g: TempName/file.pdf">
-              <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Use ';' to separate between files"></span>
+              <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Use <,> to separate between files"></span>
             </div>
           </div>
         </div>
@@ -118,7 +118,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <button type="reset" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <input type="reset" class="close" data-dismiss="modal" aria-label="Close" value="&times;">
               <h4 class="modal-title" id="myModalLabel">File configurations</h4>
             </div>
             <form id="configForm" action="" method="post" autocomplete="off">
@@ -148,25 +148,16 @@
                       <input type="radio" id="yes_replace" value="yes" name="hasReplaced"> <label for="yes_replace"> Yes</label>
                     </div>
                     <div class="col-lg-9" style="display: none">
-                      <div class="row">
-                        <div class="col-lg-5">
-                          <input id="replaced_txt_key" name="replaced_txt_key" type="text" class="form-control" placeholder="Enter key name">
-                        <div class="col-lg-2 text-center">
-                        </div>
-                          <span>By</span>
-                        </div>
-                        <div class="col-lg-5">
-                          <input id="replaced_txt_val" name="replaced_txt_val" type="text" class="form-control" placeholder="Enter values name">
-                        </div>
-                      </div>
+                      <input id="replaced_txt" name="replaced_txt" type="text" class="form-control" placeholder="Enter the keys:">
+                      <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="you can use <,> to separate between keys"></span>
                     </div>
                   </div>
                 </div>
                 <!-- Replaced input end  -->
               </div>
               <div class="modal-footer">
-                <button type="reset" class="btn btn-default">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <input type="reset" class="btn btn-default" value="Close">
+                <input type="submit" class="btn btn-primary" value="Save changes">
               </div>
             </form>
           </div>
