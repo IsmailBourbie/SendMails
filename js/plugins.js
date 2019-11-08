@@ -20,24 +20,58 @@ $(document).ready(function() {
         "sender": $('#sender').val().trim(),
         "subject":$('#subject').val().trim(),
         "receivers": {
-          "type": $('input[name=receiversType]:checked', 'form.main-form').val(),
+          "type": $('input[name=receiversType]:checked', 'form.main-form').val().trim(),
           "data":""
         },
         "body": {
-          "type":$('input[name=bodyType]:checked', 'form.main-form').val(),
+          "type":$('input[name=bodyType]:checked', 'form.main-form').val().trim(),
           "data":"",
           "configuration": {
-            "hasImages": $('input[name=hasImages]:checked', '#configForm').val(),
+            "hasImages": $('input[name=hasImages]:checked', '#configForm').val().trim(),
             "images": "",
-            "hasReplacedText": $('input[name=hasReplaced]:checked', '#configForm').val(),
+            "hasReplacedText": $('input[name=hasReplaced]:checked', '#configForm').val().trim(),
             "replacedKeys":""
           }
         },
         "attachements": {
-          "hasAttachements": $('input[name=hasAttachment]:checked', 'form.main-form').val(),
+          "hasAttachements": $('input[name=hasAttachment]:checked', 'form.main-form').val().trim(),
           "attachementsFiles": ""
         }
       };
+      // check for receivers type
+      if(formData.receivers.type == "inline") {
+        formData.receivers.data = $('#receivers_inline').val().trim();
+      } else if(formData.receivers.type == "file") {
+        formData.receivers.data = $('#receivers_file').val().trim();
+      }
+
+      // check for body type
+      if(formData.body.type == "inline") {
+        formData.body.data = $('#body_inline').val().trim();
+      } else if(formData.body.type == "file") {
+        formData.body.data = $('#body_file').val().trim();
+      }
+
+      // check for configuration params
+      //// hasImages:
+      if(formData.body.configuration.hasImages == "true") {
+        formData.body.configuration.images = $('#images_temp').val().trim();
+      } else if(formData.body.configuration.hasImages == "false") {
+        formData.body.configuration.images = ""
+      }
+      //// hasReplaced
+      if(formData.body.configuration.hasReplacedText == "true") {
+        formData.body.configuration.replacedKeys = $('#replaced_txt').val().trim();
+      } else if(formData.body.configuration.hasReplacedText == "false") {
+        formData.body.configuration.replacedKeys = ""
+      }
+
+      // check for attachements type
+      if(formData.attachements.hasAttachements == "true") {
+        formData.attachements.attachementsFiles = $('#attachment_file').val().trim();
+      } else if(formData.attachements.hasAttachements == "false") {
+        formData.attachements.attachementsFiles = "";
+      }
       console.log(formData);
       /*
       $.ajax({

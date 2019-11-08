@@ -72,7 +72,7 @@
               <input type="radio" id="htmlFile" value="file" name="bodyType"> <label for="htmlFile"> File</label>
             </div>
             <div class="col-lg-8 inline">
-              <textarea id="body" name="body" class="form-control autosize" cols="35" placeholder="Write a message..." ></textarea>
+              <textarea id="body_inline" name="body" class="form-control autosize" cols="35" placeholder="Write a message..." ></textarea>
               <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="you can write direct message as txt format without any Configuration"></span>
             </div>
             <div class="col-lg-8 file" style="display : none">
