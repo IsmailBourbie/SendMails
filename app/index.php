@@ -7,6 +7,5 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 }
 
 $inputs = Request::post();
-die(var_dump($inputs));
 
 var_dump($_POST);

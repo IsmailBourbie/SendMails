@@ -28,7 +28,7 @@
         <!-- Sender input start  -->
         <div class="inputs-group">
           <label>Sender: *</label>
-          <input id="sender" name="sender" type="email" class="form-control" placeholder="e.g: bourbie@gmail.com" required>
+          <input id="sender" name="sender" type="email" class="form-control" placeholder="e.g: bourbie@gmail.com" >
         </div>
         <!-- Sender input end  -->
 
@@ -48,7 +48,7 @@
                 <input type="radio" id="file" value="file" name="receiversType"> <label for="file"> File</label>
               </div>
               <div class="col-lg-8 inline">
-                <input id="receivers_inline" name="receivers_inline" type="email" class="form-control" placeholder="e.g: bourbie@gmail.com" required multiple>
+                <input id="receivers_inline" name="receivers_inline" type="email" class="form-control" placeholder="e.g: bourbie@gmail.com"  multiple>
                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="you can use multiple adresses by using <,> as separations"></span>
               </div>
               <div class="col-lg-8 file" style="display : none">
@@ -72,7 +72,7 @@
               <input type="radio" id="htmlFile" value="file" name="bodyType"> <label for="htmlFile"> File</label>
             </div>
             <div class="col-lg-8 inline">
-              <textarea id="body" name="body" class="form-control autosize" cols="35" placeholder="Write a message..." required></textarea>
+              <textarea id="body" name="body" class="form-control autosize" cols="35" placeholder="Write a message..." ></textarea>
               <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="you can write direct message as txt format without any Configuration"></span>
             </div>
             <div class="col-lg-8 file" style="display : none">
@@ -87,8 +87,8 @@
           <label style="display:block">Has Attachment:</label>
           <div class="row inputs-has-icons">
             <div class="col-lg-4 hasSomething">
-              <input type="radio" id="no" value="no" name="hasAttachment" checked> <label for="no" style="margin-right: 10px"> No</label>
-              <input type="radio" id="yes" value="yes" name="hasAttachment"> <label for="yes"> Yes</label>
+              <input type="radio" id="no" value="false" name="hasAttachment" checked> <label for="no" style="margin-right: 10px"> No</label>
+              <input type="radio" id="yes" value="true" name="hasAttachment"> <label for="yes"> Yes</label>
             </div>
             <div class="col-lg-8" style="display: none">
               <input id="attachment_file" name="attachment_file" type="text" class="form-control tempName" placeholder="e.g: TempName/file.pdf">
@@ -128,8 +128,8 @@
                 <label style="display:block">Has Images:</label>
                 <div class="row inputs-has-icons">
                   <div class="col-lg-3 hasSomething">
-                    <input type="radio" id="no_img" value="no" name="hasImages" checked> <label for="no_img" style="margin-right: 10px"> No</label>
-                    <input type="radio" id="yes_img" value="yes" name="hasImages"> <label for="yes_img"> Yes</label>
+                    <input type="radio" id="no_img" value="false" name="hasImages" checked> <label for="no_img" style="margin-right: 10px"> No</label>
+                    <input type="radio" id="yes_img" value="true" name="hasImages"> <label for="yes_img"> Yes</label>
                   </div>
                   <div class="col-lg-9" style="display: none">
                     <input id="images_temp" name="images_temp" type="text" class="form-control tempName" placeholder="Enter directory name:">
@@ -144,8 +144,8 @@
                   <label style="display:block">Has Replaced Text:</label>
                   <div class="row inputs-has-icons">
                     <div class="col-lg-3 hasSomething">
-                      <input type="radio" id="no_replace" value="no" name="hasReplaced" checked> <label for="no_replace" style="margin-right: 10px"> No</label>
-                      <input type="radio" id="yes_replace" value="yes" name="hasReplaced"> <label for="yes_replace"> Yes</label>
+                      <input type="radio" id="no_replace" value="false" name="hasReplaced" checked> <label for="no_replace" style="margin-right: 10px"> No</label>
+                      <input type="radio" id="yes_replace" value="true" name="hasReplaced"> <label for="yes_replace"> Yes</label>
                     </div>
                     <div class="col-lg-9" style="display: none">
                       <input id="replaced_txt" name="replaced_txt" type="text" class="form-control" placeholder="Enter the keys:">
