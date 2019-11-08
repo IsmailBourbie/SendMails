@@ -17,7 +17,10 @@ $(document).ready(function() {
     $("form.main-form").submit(function($e) {
       $e.preventDefault();
       let formData = {
-        "sender": $('#sender').val().trim(),
+        "sender": {
+          "email": $('#sender_email').val().trim(),
+          "name": $('#sender_name').val().trim()
+        },
         "subject":$('#subject').val().trim(),
         "receivers": {
           "type": $('input[name=receiversType]:checked', 'form.main-form').val().trim(),
@@ -73,7 +76,7 @@ $(document).ready(function() {
         formData.attachements.attachementsFiles = "";
       }
       console.log(formData);
-      /*
+      
       $.ajax({
         'method': 'POST',
         'url': 'app/index.php',
@@ -81,7 +84,7 @@ $(document).ready(function() {
         'data':  formData,
       }).done(function (msg) {
         console.log(msg);
-      });*/
+      });
     });
 
 

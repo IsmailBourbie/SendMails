@@ -8,4 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 $inputs = Request::post();
 
+echo "<pre>";
 var_dump($_POST);
+echo "</pre>";

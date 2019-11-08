@@ -27,8 +27,16 @@
       <form class="main-form" autocomplete="off" method="post" action="app/index.php">
         <!-- Sender input start  -->
         <div class="inputs-group">
-          <label>Sender: *</label>
-          <input id="sender" name="sender" type="email" class="form-control" placeholder="e.g: bourbie@gmail.com" >
+          <div class="row">
+            <div class="col-lg-6">
+              <label>Sender's email: *</label>
+              <input id="sender_email" name="sender_email" type="email" class="form-control" placeholder="e.g: bourbie@gmail.com" >
+            </div>
+            <div class="col-lg-6">
+              <label>Sender's name: *</label>
+              <input id="sender_name" name="sender_name" type="text" class="form-control" placeholder="e.g: BOURBIE Ismail" >
+            </div>
+          </div>        
         </div>
         <!-- Sender input end  -->
 
