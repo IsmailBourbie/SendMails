@@ -21,7 +21,6 @@ $(document).ready(function() {
           "email": $('#sender_email').val().trim(),
           "name": $('#sender_name').val().trim()
         },
-        "subject":$('#subject').val().trim(),
         "receivers": {
           "type": $('input[name=receiversType]:checked', 'form.main-form').val().trim(),
           "data":""
@@ -29,6 +28,7 @@ $(document).ready(function() {
         "body": {
           "type":$('input[name=bodyType]:checked', 'form.main-form').val().trim(),
           "data":"",
+          "subject":$('#subject').val().trim(),
           "configuration": {
             "hasImages": $('input[name=hasImages]:checked', '#configForm').val().trim(),
             "images": "",
