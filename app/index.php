@@ -21,4 +21,5 @@ $config = [
 
 $mail = new Mail($r, $b, $config);
 $mail->setup_config($config);
-$mail->send_mails();
+$tracing = $mail->send_mails();
+echo json_encode($tracing);

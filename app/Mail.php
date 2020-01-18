@@ -121,24 +121,29 @@ class Mail {
     }
 
     public function send_mails() {
-        // $recipients = json_decode(file_get_contents('test.json'), true);;
+        $tracing = [
+            'not_sent' => [],
+            'sent' => [],
+
+        ];
         foreach($this->recipients as $recipient) {
             $email = $recipient['email'];
             $name = $recipient['name'];
             $this->setup_recipients($email, $name);
             $this->setup_content($this->body, $recipient);
-            $this->send($email, $name);
+            $tracing = $this->send($email, $name, $tracing);
             $this->mailer->ClearAddresses();
         }
+        return $tracing;
     }
 
-    private function send($email, $name) {
-        $tracing = [];
+    private function send($email, $name, $tracing) {
         if(!$this->mailer->send()) {
             $tracing['not_sent'][] = [$email, $name];
         } else {
             $tracing['sent'][] = [$email, $name];
         }
+        return $tracing;
     }
 
 
