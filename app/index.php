@@ -20,6 +20,16 @@ $config = [
 ];
 
 $mail = new Mail($r, $b, $config);
+$time = new Time();
+
+$time->start();
 $mail->setup_config($config);
 $tracing = $mail->send_mails();
-echo json_encode($tracing);
+$time->finish();
+
+$response = [
+  'status' => 200,
+  'spentTime' => $time->spent_time(),
+  'tracing' => $tracing,
+];
+echo json_encode($response);
