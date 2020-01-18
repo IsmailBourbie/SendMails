@@ -14,13 +14,30 @@ class Mail {
      */
     private $mailer;
 
+    /**
+     * Array of recipients
+     * @var array
+     * @access private
+     */
+    private $recipients;
+
+    /**
+     * Array of recipients
+     * @var array
+     * @access private
+     */
+    private $body;
+
      /**
       * Constructor of Mail Class
       * @param Array : configuration of the system
       *
       */
-    public function __construct() {
+    public function __construct($recipients, $body, $config) {
         $this->mailer = new PHPMailer(true);
+        $this->recipients = json_decode(file_get_contents($recipients), true);
+        // die(var_dump($this->recipients));
+        $this->body = $body;
     }
 
 
@@ -36,7 +53,7 @@ class Mail {
         $this->mailer->Password   = $config['password'];                    // SMTP password
         $this->mailer->SMTPSecure = $config['SMTPSecure'];                  // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
         $this->mailer->Port       = $config['port'];
-        $this->mailer->setFrom($config['setFrom_email'], $config['setFrom_name']);
+        $this->mailer->setFrom('bourbieismail@gmail.com');
     }
 
     /**
@@ -45,7 +62,7 @@ class Mail {
      * @param string $repleyTo_email 
      * @param string $repleyTo_name 
      */
-    public function setup_recipients ($email, $name) {
+    private function setup_recipients ($email, $name) {
             if(trim($name) != "") {
                 $this->mailer->addAddress($email, $name);     // Add a recipient
             } else {
@@ -55,29 +72,28 @@ class Mail {
 
     /**
      * setup the mail Content
-     * @param Array $body
      */
-    public function setup_content(Array $body) {
+    private function setup_content($body, $recipient) {
         // TODO: implement is_html() and setup_body() function 
-        $this->mailer->isHTML($this->is_html($body['data']));                                  // Set email format to HTML
+        $this->mailer->isHTML(true);                                  // Set email format to HTML
         $this->mailer->Subject = $body['subject'];
-        $this->mailer->Body    = $this->setup_body($body['type'], $body['data'], $body['configuration']);
+        $this->mailer->Body    = $this->setup_body($body['type'], $body['data'], $body['configuration'], $recipient);
         $this->mailer->AltBody = 'This is the body in plain text for non-HTML mail clients';
     }
 
     /**
      * setup the body information
      * @param String $type; type of the mail (inline or file)
-     * @param String $data: the content of the body
+     * @param String $message: the content of the body
      * @param Array $config 
      * @return String $message
      */
-    private function setup_body($type, $data, $config) {
+    private function setup_body($type, $data, $config, $recipient) {
         if($type === 'inline') {
             $message = $data;
         } else if($type === 'file') {
             $message = file_get_contents($data);
-            $message = $this->setup_configuration($data, $config);
+            $message = $this->setup_configuration($message, $config, $recipient);
         }
         return $message;
     }
@@ -87,23 +103,30 @@ class Mail {
      * @param Array $config
      * @param string $data
      */
-    private function setup_configuration($data, $config) {
+    private function setup_configuration($message, $config, $recipient = 0) {
         // setup images
         if($config['hasImages'] == 'true') {
-            $this->setup_images($config['images']);
+            // $this->setup_images($config['images']);
         }
 
         // setup replacedText
         if($config['hasReplacedText'] == 'true') {
-            $this->setup_keys($config['replacedKeys'], $data);
+            // $this->setup_keys($config['replacedKeys'], $data);
+            $search = "%".$config['replacedKeys']."%";
+            $replace = $recipient['name'];
+            $message = str_replace($search, $replace, $message);
         }
+
+        return $message;
     }
 
-    public function send_mails($recipients, $body) {
-        $recipients = $this->doSomthing($recipients);
-        foreach($recipients as $email => $name) {
+    public function send_mails() {
+        // $recipients = json_decode(file_get_contents('test.json'), true);;
+        foreach($this->recipients as $recipient) {
+            $email = $recipient['email'];
+            $name = $recipient['name'];
             $this->setup_recipients($email, $name);
-            $this->setup_content($body);
+            $this->setup_content($this->body, $recipient);
             $this->send($email, $name);
             $this->mailer->ClearAddresses();
         }
