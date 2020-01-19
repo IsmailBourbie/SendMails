@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Send Mails</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
   </head>
@@ -21,8 +23,7 @@
     </nav>
     <div class="container">
       <header class="text-center">
-        <h1>Send Mail</h1>
-        <p class="lead">Send mails to multiple adresses automaticaly</p>
+        <h1 class="lead">Send mails to multiple adresses automaticaly</h1>
       </header>
       <form class="main-form" autocomplete="off" method="post" action="app/index.php">
         <!-- Sender input start  -->
