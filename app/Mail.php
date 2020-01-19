@@ -103,20 +103,34 @@ class Mail {
      * @param Array $config
      * @param string $data
      */
-    private function setup_configuration($message, $config, $recipient = 0) {
+    private function setup_configuration($message, $config, $recipient) {
         // setup images
         if($config['hasImages'] == 'true') {
             // $this->setup_images($config['images']);
         }
 
-        // setup replacedText
-        if($config['hasReplacedText'] == 'true') {
-            // $this->setup_keys($config['replacedKeys'], $data);
-            $search = "%".$config['replacedKeys']."%";
-            $replace = $recipient['name'];
-            $message = str_replace($search, $replace, $message);
-        }
+        $message = $this->setupReplacedText($message, $recipient, $config['replacedKeys'], $config['hasReplacedText']);
 
+        return $message;
+    }
+
+    /**
+     * replace keys with their values from json file
+     * @param string $message
+     * @param array $recipient
+     * @param string $replacedKeys : has all the keys separated with ','
+     * @param strinf $hasReplacedText: by default is false
+     * @return bool $message: after relace keys with values
+     */
+    private function setupReplacedText($message, $recipient, $replacedKeys, $hasReplacedText = 'false') {
+        if($hasReplacedText == 'true') {
+            $replacedKeys = explode(',', $replacedKeys);
+            foreach($replacedKeys as $replacedKey) {
+                $search = "%".$replacedKey."%";
+                $replace = $recipient[$replacedKey];
+                $message = str_replace($search, $replace, $message);
+            }            
+        }
         return $message;
     }
 

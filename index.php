@@ -147,7 +147,7 @@
               </div>
               <!-- Images input end  -->
 
-                <!-- Images input start  -->
+                <!-- Replaced input start  -->
                 <div class="inputs-group">
                   <label style="display:block">Has Replaced Text:</label>
                   <div class="row inputs-has-icons">
