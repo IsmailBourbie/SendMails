@@ -11,6 +11,7 @@ $inputs = Request::post();
 $s = $inputs['sender'];
 $r = $inputs['receivers'];
 $b = $inputs['body'];
+$a = $inputs['attachements'];
 
 $config = [
   'host' => "smtp.gmail.com",
@@ -20,7 +21,7 @@ $config = [
   'port' => 465,
 ];
 
-$mail = new Mail($r, $b, $s);
+$mail = new Mail($r, $b, $s, $a);
 $time = new Time();
 
 $time->start();

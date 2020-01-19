@@ -41,11 +41,12 @@ class Mail {
       * @param array $body
       *
       */
-    public function __construct($recipients, $body, $sender) {
+    public function __construct($recipients, $body, $sender, $attachements) {
         $this->mailer = new PHPMailer(true);
         $this->checkRecipients($recipients);
         $this->sender = $sender;
         $this->body = $body;
+        $this->attachements = $attachements;
     }
 
 
@@ -140,13 +141,31 @@ class Mail {
         return $message;
     }
 
+    public function setup_attachements() {        
+        $attachements = $this->attachements;
+
+        if($attachements['hasAttachements'] == 'true') {
+            $attachementsFiles = $attachements['attachementsFiles'];
+            $folder = implode('/', explode('/', $attachementsFiles, -1));
+            $folder = $folder !== "" ? $folder . "/" : "";
+            $parts = explode('/', $attachementsFiles);
+            $files = explode(',', end($parts));        
+            foreach($files as $file) {
+                $path = $folder.''.$file;
+                if(Helper::validFile($path)) {
+                    $this->mailer->addAttachment($path, $file);       
+                }
+            }
+        }
+    }
     public function sendAll() {
         $tracing = [
             'not_sent' => [],
             'sent' => [],
 
-        ];
+        ];        
         $this->mailer->setFrom($this->sender['email'], $this->sender['name']);
+        $this->setup_attachements();
         foreach($this->recipients as $recipient) {
             $email = $recipient['email'];
             $name = $recipient['name'];
