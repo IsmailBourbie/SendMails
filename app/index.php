@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 $inputs = Request::post();
 
+$s = $inputs['sender'];
 $r = $inputs['receivers'];
 $b = $inputs['body'];
 
@@ -19,12 +20,12 @@ $config = [
   'port' => 465,
 ];
 
-$mail = new Mail($r, $b, $config);
+$mail = new Mail($r, $b, $s);
 $time = new Time();
 
 $time->start();
 $mail->setup_config($config);
-$tracing = $mail->send_mails();
+$tracing = $mail->sendAll();
 $time->finish();
 
 $response = [

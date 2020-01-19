@@ -19,6 +19,13 @@ class Mail {
      * @var array
      * @access private
      */
+    private $sender;
+
+    /**
+     * Array of recipients
+     * @var array
+     * @access private
+     */
     private $recipients;
 
     /**
@@ -34,10 +41,10 @@ class Mail {
       * @param array $body
       *
       */
-    public function __construct($recipients, $body, $config) {
+    public function __construct($recipients, $body, $sender) {
         $this->mailer = new PHPMailer(true);
         $this->checkRecipients($recipients);
-        // die(var_dump($this->recipients));
+        $this->sender = $sender;
         $this->body = $body;
     }
 
@@ -53,8 +60,7 @@ class Mail {
         $this->mailer->Username   = $config['username'];                    // SMTP username
         $this->mailer->Password   = $config['password'];                    // SMTP password
         $this->mailer->SMTPSecure = $config['SMTPSecure'];                  // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-        $this->mailer->Port       = $config['port'];
-        $this->mailer->setFrom('bourbieismail@gmail.com');
+        $this->mailer->Port       = $config['port'];        
     }
 
     /**
@@ -75,7 +81,6 @@ class Mail {
      * setup the mail Content
      */
     private function setup_content($body, $recipient) {
-        // TODO: implement is_html() and setup_body() function 
         $this->mailer->isHTML(true);                                  // Set email format to HTML
         $this->mailer->Subject = $body['subject'];
         $this->mailer->Body    = $this->setup_body($body['type'], $body['data'], $body['configuration'], $recipient);
@@ -135,12 +140,13 @@ class Mail {
         return $message;
     }
 
-    public function send_mails() {
+    public function sendAll() {
         $tracing = [
             'not_sent' => [],
             'sent' => [],
 
         ];
+        $this->mailer->setFrom($this->sender['email'], $this->sender['name']);
         foreach($this->recipients as $recipient) {
             $email = $recipient['email'];
             $name = $recipient['name'];
