@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 $inputs = Request::post();
 
-$r = $inputs['receivers']['data'];
+$r = $inputs['receivers'];
 $b = $inputs['body'];
 
 $config = [

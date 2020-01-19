@@ -30,12 +30,13 @@ class Mail {
 
      /**
       * Constructor of Mail Class
-      * @param Array : configuration of the system
+      * @param array $recipients
+      * @param array $body
       *
       */
     public function __construct($recipients, $body, $config) {
         $this->mailer = new PHPMailer(true);
-        $this->recipients = json_decode(file_get_contents($recipients), true);
+        $this->checkRecipients($recipients);
         // die(var_dump($this->recipients));
         $this->body = $body;
     }
@@ -63,7 +64,7 @@ class Mail {
      * @param string $repleyTo_name 
      */
     private function setup_recipients ($email, $name) {
-            if(trim($name) != "") {
+            if(trim($name) != "" && !is_null(trim($name))) {
                 $this->mailer->addAddress($email, $name);     // Add a recipient
             } else {
                 $this->mailer->addAddress($email);               // Name is optional
@@ -160,6 +161,28 @@ class Mail {
         return $tracing;
     }
 
+    /**
+     * Check reciptions if it's file or inline
+     * @param array $recipients
+     */
+    private function checkRecipients(Array $recipients) {
+        if($recipients['type'] === 'file') {
+            $this->recipients = json_decode(file_get_contents($recipients['data']), true);
+        } elseif($recipients['type'] === 'inline') {
+            $recipients = explode(',', $recipients['data']);
+            $this->recipients = $this->formatRecipients($recipients);
+        }
+    }
 
+    private function formatRecipients(Array $recipients) {
+        $formattedArray = [];
+        foreach($recipients as $recipient) {                
+            $formattedArray[] = [
+                "email" => $recipient,
+                "name" => NULL
+            ];
+        }
+        return $formattedArray;
+    }
 
 }
