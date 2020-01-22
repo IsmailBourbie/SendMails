@@ -164,6 +164,17 @@ class Mail {
             }
         }
     }
+
+
+    public function setup_images($dir) 
+    {
+        $dir = 'workspace/' . $dir;
+        $e = array_diff(scandir($dir), array('.', '..'));
+        foreach($e as $key => $val) {
+            echo $val . "<br>";
+        }
+        die();
+    }
     public function sendAll() {
         $tracing = [
             'not_sent' => [],

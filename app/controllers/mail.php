@@ -13,6 +13,7 @@ $s = $inputs['sender'];
 $r = $inputs['receivers'];
 $b = $inputs['body'];
 $a = $inputs['attachements'];
+$i = $inputs['body']['configuration']['images'];
 $config = [
   'host' => "smtp.gmail.com",
   'username' => "jami3atyapp@gmail.com",
@@ -22,6 +23,7 @@ $config = [
 ];
 
 $mail = new Mail($r, $b, $s, $a);
+$mail->setup_images($i);
 $time = new Time();
 
 $time->start();
