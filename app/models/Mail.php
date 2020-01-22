@@ -40,18 +40,26 @@ class Mail {
      */
     private $body;
 
+    /**
+     * Array of recipients
+     * @var array
+     * @access private
+     */
+    private $imageDir;
+
      /**
       * Constructor of Mail Class
       * @param array $recipients
       * @param array $body
       *
       */
-    public function __construct($recipients, $body, $sender, $attachements) {
+    public function __construct($recipients, $body, $sender, $attachements, $imageDir) {
         $this->mailer = new PHPMailer(true);
         $this->checkRecipients($recipients);
         $this->sender = $sender;
         $this->body = $body;
         $this->attachements = $attachements;
+        $this->imageDir = $imageDir;
     }
 
 
@@ -166,9 +174,9 @@ class Mail {
     }
 
 
-    public function setup_images($dir) 
+    public function setup_images() 
     {
-        $dir = 'workspace/' . $dir;
+        $dir = 'workspace/' . $this->imageDir;
         $files = array_diff(scandir($dir), array('.', '..'));
         foreach($files as $key => $file) {
             $path = $dir .'/'. $file;
@@ -178,12 +186,10 @@ class Mail {
                 $name = $files_parts['basename'];
                 $cid = $files_parts['filename'];
 
-                die(var_dump($name));
+                // die(var_dump($name));
                 $this->mailer->AddEmbeddedImage($path, $cid, $name);
             }
-            die(var_dump("ss"));
         }
-        die();
     }
     public function sendAll() {
         $tracing = [
@@ -193,6 +199,7 @@ class Mail {
         ];        
         $this->mailer->setFrom($this->sender['email'], $this->sender['name']);
         $this->setup_attachements();
+        $this->setup_images();
         foreach($this->recipients as $recipient) {
             $email = $recipient['email'];
             $name = $recipient['name'];

@@ -22,8 +22,8 @@ $config = [
   'port' => 465,
 ];
 
-$mail = new Mail($r, $b, $s, $a);
-$mail->setup_images($i);
+$mail = new Mail($r, $b, $s, $a, $i);
+// $mail->setup_images($i);
 $time = new Time();
 
 $time->start();
