@@ -42,7 +42,7 @@ class Router
     public function direct($url)
     {
         if(array_key_exists($url, $this->routes)) {
-            require $this->routes[$url];
+            require "app/controllers/{$this->routes[$url]}";
         } else {
             die("No file found for this uri: $url");
             

@@ -2,8 +2,8 @@
 
 $router->define(
     [
-    "" => "controllers/index.php",
-    "send" => "Controllers/send.php",
-    "configurations" => "controllers/configurations.php"
+    "" => "index.php",
+    "send" => "send.php",
+    "configurations" => "configurations.php"
     ]
 );
