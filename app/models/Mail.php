@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Classes\Helper;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 
 class Mail {
 
@@ -58,7 +59,7 @@ class Mail {
      * setup the configuration of the server
      * @param Array : configurations
      */
-    public function setup_config(Array $config) {        
+    public function setup_config(Array $config) {
         $this->mailer->isSMTP();                                            // Send using SMTP
         $this->mailer->Host       = $config['host'];                        // Set the SMTP server to send through
         $this->mailer->SMTPAuth   = true;                                   // Enable SMTP authentication
@@ -103,7 +104,8 @@ class Mail {
         if($type === 'inline') {
             $message = $data;
         } else if($type === 'file') {
-            $message = file_get_contents($data);
+            $file = 'workspace/' . $data;
+            $message = file_get_contents($file);
             $message = $this->setup_configuration($message, $config, $recipient);
         }
         return $message;
@@ -155,8 +157,8 @@ class Mail {
             $parts = explode('/', $attachementsFiles);
             $files = explode(',', end($parts));        
             foreach($files as $file) {
-                $path = $folder.''.$file;
-                if(Helper::validFile($path)) {
+                $path = 'workspace/' . $folder.''.$file;
+                if(Helper::validAttachements($path)) {
                     $this->mailer->addAttachment($path, $file);       
                 }
             }
@@ -197,8 +199,7 @@ class Mail {
     private function checkRecipients(Array $recipients) {
         if($recipients['type'] === 'file') {
             $file = 'workspace/' . $recipients['data'];
-            $this->recipients = json_decode(file_get_contents($file, true));
-            die(var_dump($this->recipients[0]));
+            $this->recipients = json_decode(file_get_contents($file), true);
         } elseif($recipients['type'] === 'inline') {
             $recipients = explode(',', $recipients['data']);
             $this->recipients = $this->formatRecipients($recipients);

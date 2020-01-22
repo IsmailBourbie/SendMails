@@ -4,7 +4,7 @@ namespace App\Classes;
 class Helper {
 
     //
-    public static function validFile($file) {
+    public static function validAttachements($file) {
         $valid_extenssions = ['pdf', 'doc', 'docx', 'txt', 'json'];
 
         if(file_exists($file)) {
