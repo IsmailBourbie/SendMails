@@ -196,7 +196,9 @@ class Mail {
      */
     private function checkRecipients(Array $recipients) {
         if($recipients['type'] === 'file') {
-            $this->recipients = json_decode(file_get_contents($recipients['data']), true);
+            $file = 'workspace/' . $recipients['data'];
+            $this->recipients = json_decode(file_get_contents($file, true));
+            die(var_dump($this->recipients[0]));
         } elseif($recipients['type'] === 'inline') {
             $recipients = explode(',', $recipients['data']);
             $this->recipients = $this->formatRecipients($recipients);

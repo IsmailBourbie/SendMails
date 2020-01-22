@@ -79,7 +79,7 @@ $(document).ready(function() {
       
       $.ajax({
         'method': 'POST',
-        'url': 'app/index.php',
+        'url': 'mail',
         'dataType': 'json',
         'data':  formData,
       }).done(function (msg) {
