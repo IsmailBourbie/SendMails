@@ -1,11 +1,9 @@
 <?php
-
+namespace App\Classes;
 
 class Helper {
 
-
-
-
+    //
     public static function validFile($file) {
         $valid_extenssions = ['pdf', 'doc', 'docx', 'txt', 'json'];
 

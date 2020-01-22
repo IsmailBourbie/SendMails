@@ -1,4 +1,6 @@
 <?php
+
+use App\Classes\Time;
 use Core\Request;
 use App\Models\Mail;
 
