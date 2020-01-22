@@ -169,9 +169,19 @@ class Mail {
     public function setup_images($dir) 
     {
         $dir = 'workspace/' . $dir;
-        $e = array_diff(scandir($dir), array('.', '..'));
-        foreach($e as $key => $val) {
-            echo $val . "<br>";
+        $files = array_diff(scandir($dir), array('.', '..'));
+        foreach($files as $key => $file) {
+            $path = $dir .'/'. $file;
+            if(Helper::validImage($path))
+            {
+                $files_parts = pathinfo($path);
+                $name = $files_parts['basename'];
+                $cid = $files_parts['filename'];
+
+                die(var_dump($name));
+                $this->mailer->AddEmbeddedImage($path, $cid, $name);
+            }
+            die(var_dump("ss"));
         }
         die();
     }
