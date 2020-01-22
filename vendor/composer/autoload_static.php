@@ -11,6 +11,14 @@ class ComposerStaticInit6934c0805a0de61bf84b5c8e9893e613
         array (
             'PHPMailer\\PHPMailer\\' => 20,
         ),
+        'C' => 
+        array (
+            'Core\\' => 5,
+        ),
+        'A' => 
+        array (
+            'App\\' => 4,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -18,10 +26,14 @@ class ComposerStaticInit6934c0805a0de61bf84b5c8e9893e613
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
-    );
-
-    public static $fallbackDirsPsr4 = array (
-        0 => __DIR__ . '/../..' . '/app',
+        'Core\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/core',
+        ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app',
+        ),
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -29,7 +41,6 @@ class ComposerStaticInit6934c0805a0de61bf84b5c8e9893e613
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit6934c0805a0de61bf84b5c8e9893e613::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit6934c0805a0de61bf84b5c8e9893e613::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit6934c0805a0de61bf84b5c8e9893e613::$fallbackDirsPsr4;
 
         }, null, ClassLoader::class);
     }
