@@ -43,4 +43,11 @@ Class Request {
         return $_SERVER['REQUEST_METHOD'];
     }
 
+    /**
+     * get data from $_POST 
+     * @return array $_POST
+     */
+    public static function post() {
+        return filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      }
 }

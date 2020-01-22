@@ -3,7 +3,7 @@
 $router->define(
     [
     "" => "index.php",
-    "send" => "send.php",
+    "mail" => "mail.php",
     "configurations" => "configurations.php"
     ]
 );
