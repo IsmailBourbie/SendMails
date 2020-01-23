@@ -1,6 +1,7 @@
 <?php
 
 use App\Classes\File;
+use App\Classes\JsonFile;
 use App\Classes\Time;
 use Core\Request;
 use App\Models\Mail;
@@ -27,7 +28,8 @@ $config = [
 // $mail->setup_images($i);
 // $time = new Time();
 $i = 'test/test.json';
-$file = new File($i);
+$file = new JsonFile($i);
+die(var_dump($file->isValid()));
 // $time->start();
 // $mail->setup_config($config);
 // $tracing = $mail->sendAll();

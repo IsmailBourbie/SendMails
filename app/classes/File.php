@@ -7,30 +7,30 @@ abstract class File {
         /**
          * dirname of file
          * @var string $dirname
-         * @access private
+         * @access protected
          */
-        private $dirname = NULL;
+        protected $dirname = NULL;
     
         /**
          * filename of file
          * @var string $filename
-         * @access private
+         * @access protected
          */
-        private $filename = NULL;
+        protected $filename = NULL;
     
         /**
          * basename of file
          * @var string $basename
-         * @access private
+         * @access protected
          */
-        private $basename = NULL;
+        protected $basename = NULL;
 
         /**
          * extension of file
          * @var string $extension
-         * @access private
+         * @access protected
          */
-        private $extension = NULL;
+        protected $extension = NULL;
     
 
         public function __construct($file)
@@ -43,7 +43,7 @@ abstract class File {
                 $this->basename = $file_parts['basename'];
                 $this->filename = $file_parts['filename'];
                 $this->extension = $file_parts['extension'];
-            }            
+            }
         }
 
 
@@ -59,9 +59,15 @@ abstract class File {
 
         /**
          * check if is valid file depending en extension
-         * @return true
+         * @return bool
          */
         public abstract function isValid();
+
+        /**
+         * return content of file
+         * @return mixed
+         */
+        public abstract function content();
 
 
         /**
