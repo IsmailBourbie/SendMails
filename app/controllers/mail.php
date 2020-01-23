@@ -1,11 +1,12 @@
 <?php
 
+use App\Classes\File;
 use App\Classes\Time;
 use Core\Request;
 use App\Models\Mail;
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-  header('Location: /sendMails');
+  // header('Location: /sendMails');
 }
 $inputs = Request::post();
 
@@ -22,14 +23,15 @@ $config = [
   'port' => 465,
 ];
 
-$mail = new Mail($r, $b, $s, $a, $i);
+// $mail = new Mail($r, $b, $s, $a, $i);
 // $mail->setup_images($i);
-$time = new Time();
-
-$time->start();
-$mail->setup_config($config);
-$tracing = $mail->sendAll();
-$time->finish();
+// $time = new Time();
+$i = 'test/test.json';
+$file = new File($i);
+// $time->start();
+// $mail->setup_config($config);
+// $tracing = $mail->sendAll();
+// $time->finish();
 
 $response = [
   'status' => 200,
