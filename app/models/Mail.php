@@ -4,6 +4,7 @@ namespace App\Models;
 // Import PHPMailer classes into the global namespace
 // These must be at the top of your script, not inside a function
 
+use App\Classes\Files\AttachmentFile;
 use App\Classes\Files\ImageFile;
 use App\Classes\Helper;
 use PHPMailer\PHPMailer\Exception;
@@ -171,15 +172,16 @@ class Mail
         if ($attachments['hasAttachments'] == 'true') {
             $attachmentsFiles = $attachments['attachmentsFiles'];
             $folder = implode('/', explode('/', $attachmentsFiles, -1));
-            $folder = $folder !== "" ? $folder . "/" : "";
+            $dir = 'workspace/' . $folder;
             $parts = explode('/', $attachmentsFiles);
             $files = explode(',', end($parts));
-            foreach ($files as $file) {
-                $path = 'workspace/' . $folder . '' . $file;
-                if (Helper::validAttachements($path)) {
-                    $this->mailer->addAttachment($path, $file);
+            array_map(function ($filename) use ($dir) {
+                $path = $dir . '/' . $filename;
+                $attachment =  new AttachmentFile($path);
+                if ($attachment->isValid()) {
+                    $this->mailer->addAttachment($attachment->getFilepath(), $attachment->getBasename());
                 }
-            }
+            }, $files);
         }
     }
 
