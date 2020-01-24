@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Classes;
-
+namespace App\Classes\Files;
+use App\Classes\File;
 class JsonFile extends File {
     /**
      * the authorized extensions of this files
-     * @var array validExetensions
+     * @var array validExtensions
      */
-    const VALID_EXETENSIONS = ["json"];
+    const VALID_EXTENSIONS = ["json"];
 
     /**
      * overrated isValid method
@@ -15,7 +15,7 @@ class JsonFile extends File {
      */
     public function isValid()
     {
-        return in_array($this->extension, self::VALID_EXETENSIONS);
+        return in_array($this->extension, self::VALID_EXTENSIONS);
     }
 
     /**
@@ -24,6 +24,7 @@ class JsonFile extends File {
      */
     public function content()
     {
-        return [];
+        $path = 'workspace/' . $this->dirname . '/' . $this->basename;
+        return json_decode(file_get_contents($path), true);
     }
 }
