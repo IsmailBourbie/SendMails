@@ -1,10 +1,18 @@
 [
-    {
-        "name": "Ismail",
-        "email": "bourbieismail@gmail.com"
-    },
-    {
-       "email": "mxcsyounes@gmail.com",
-       "name": "Younes"
-    }
+  {
+    "name": "Ismail",
+    "email": "bourbieismail@gmail.com"
+  },
+  {
+    "email": "mxcsyounes@gmail.com",
+    "name": "Younes"
+  },
+  {
+    "email": "Aithammouk40@gmail.com",
+    "name": "Khaled"
+  },
+  {
+    "email": "abidnajwa0@gmail.com",
+    "name": "Khadidja"
+  }
 ]
