@@ -2,22 +2,37 @@
 
 namespace App\Classes;
 
-abstract class File {
-    
+abstract class File
+{
+
+        /**
+         * dirname of file
+         * @var string $dirname
+         * @access protected
+         */
+        protected $validExtensions;
+
+        /**
+         * path of file
+         * @var string $filepath
+         * @access protected
+         */
+        protected $filepath = NULL;
+
         /**
          * dirname of file
          * @var string $dirname
          * @access protected
          */
         protected $dirname = NULL;
-    
+
         /**
          * filename of file
          * @var string $filename
          * @access protected
          */
         protected $filename = NULL;
-    
+
         /**
          * basename of file
          * @var string $basename
@@ -31,19 +46,19 @@ abstract class File {
          * @access protected
          */
         protected $extension = NULL;
-    
+
 
         public function __construct($file)
         {
-            $path = 'workspace/'. $file;
-            if($this->isExists($path))
-            {
-                $file_parts = pathinfo($file);
-                $this->dirname = $file_parts['dirname'];
-                $this->basename = $file_parts['basename'];
-                $this->filename = $file_parts['filename'];
-                $this->extension = $file_parts['extension'];
-            }
+                $path = 'workspace/' . $file;
+                if ($this->isExists($path)) {
+                        $file_parts = pathinfo($file);
+                        $this->dirname = $file_parts['dirname'];
+                        $this->basename = $file_parts['basename'];
+                        $this->filename = $file_parts['filename'];
+                        $this->extension = $file_parts['extension'];
+                        $this->filepath = 'workspace/' . $this->dirname . '/' . $this->basename;
+                }
         }
 
 
@@ -54,14 +69,17 @@ abstract class File {
          */
         public function isExists($path)
         {
-            return file_exists($path);
+                return file_exists($path);
         }
 
         /**
          * check if is valid file depending en extension
          * @return bool
          */
-        public abstract function isValid();
+        public function isValid()
+        {
+                return in_array($this->extension, $this->validExtension);
+        }
 
         /**
          * return content of file
@@ -71,10 +89,20 @@ abstract class File {
 
 
         /**
+         * get valid extensions
+         * @return array 
+         */
+        public function getValidExtension()
+        {
+                return $this->validExtension;
+        }
+
+
+        /**
          * Get $dirname
          *
          * @return  string
-         */ 
+         */
         public function getDirname()
         {
                 return $this->dirname;
@@ -84,7 +112,7 @@ abstract class File {
          * Get $filename
          *
          * @return  string
-         */ 
+         */
         public function getFilename()
         {
                 return $this->filename;
@@ -94,7 +122,7 @@ abstract class File {
          * Get $basename
          *
          * @return  string
-         */ 
+         */
         public function getBasename()
         {
                 return $this->basename;
@@ -104,9 +132,19 @@ abstract class File {
          * Get $extension
          *
          * @return  string
-         */ 
+         */
         public function getExtension()
         {
                 return $this->extension;
+        }
+
+        /**
+         * Get $filepath
+         *
+         * @return  string
+         */ 
+        public function getFilepath()
+        {
+                return $this->filepath;
         }
 }

@@ -2,12 +2,13 @@
 
 namespace App\Classes\Files;
 use App\Classes\File;
-class JsonFile extends File {
+
+class AttachmentFile extends File {
     /**
      * the authorized extensions of this files
      * @var array validExtensions
      */
-    const VALID_EXTENSIONS = ["json"];
+    const VALID_EXTENSIONS = ['pdf', 'txt', 'docs', 'doc'];
 
 
     /**
@@ -18,13 +19,14 @@ class JsonFile extends File {
         parent::__construct($file);
         $this->validExtension = self::VALID_EXTENSIONS;
     }
-
+    
     /**
-     * override content method
-     * @return array
+     * overrated content method
+     * @return Null
      */
     public function content()
-    {
-        return json_decode(file_get_contents($this->filepath), true);
+    {        
+        return NULL;
     }
 }
+

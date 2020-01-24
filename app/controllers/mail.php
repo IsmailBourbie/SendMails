@@ -1,6 +1,9 @@
 <?php
 
 use App\Classes\File;
+use App\Classes\Files\AttachmentFile;
+use App\Classes\Files\HtmlFile;
+use App\Classes\Files\ImageFile;
 use App\Classes\Files\JsonFile;
 use App\Classes\Time;
 use Core\Request;
@@ -27,9 +30,9 @@ $config = [
 // $mail = new Mail($r, $b, $s, $a, $i);
 // $mail->setup_images($i);
 // $time = new Time();
-$i = 'test/test.json';
-$file = new JsonFile($i);
-die(var_dump($file->content()));
+$i = 'test/images/tc.png';
+$file = new ImageFile($i);
+die(var_dump($file->isValid()));
 // $time->start();
 // $mail->setup_config($config);
 // $tracing = $mail->sendAll();
