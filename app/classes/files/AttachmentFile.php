@@ -20,13 +20,5 @@ class AttachmentFile extends File {
         $this->validExtension = self::VALID_EXTENSIONS;
     }
     
-    /**
-     * overrated content method
-     * @return Null
-     */
-    public function content()
-    {        
-        return NULL;
-    }
 }
 

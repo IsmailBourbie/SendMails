@@ -32,7 +32,7 @@ $config = [
 // $time = new Time();
 $i = 'test/images/tc.png';
 $file = new ImageFile($i);
-die(var_dump($file->isValid()));
+die(var_dump($file->content()));
 // $time->start();
 // $mail->setup_config($config);
 // $tracing = $mail->sendAll();

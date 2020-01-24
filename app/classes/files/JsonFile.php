@@ -2,7 +2,7 @@
 
 namespace App\Classes\Files;
 use App\Classes\File;
-class JsonFile extends File {
+class JsonFile extends File implements FileWithContent{
     /**
      * the authorized extensions of this files
      * @var array validExtensions
@@ -20,7 +20,7 @@ class JsonFile extends File {
     }
 
     /**
-     * override content method
+     * override content method from FileWithContent interface
      * @return array
      */
     public function content()

@@ -4,7 +4,7 @@ namespace App\Classes\Files;
 
 use App\Classes\File;
 
-class HtmlFile extends File {
+class HtmlFile extends File implements FileWithContent {
     /**
      * the authorized extensions of this files
      * @var array validExtensions

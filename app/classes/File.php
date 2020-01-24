@@ -80,14 +80,7 @@ abstract class File
         {
                 return in_array($this->extension, $this->validExtension);
         }
-
-        /**
-         * return content of file
-         * @return mixed
-         */
-        public abstract function content();
-
-
+        
         /**
          * get valid extensions
          * @return array 
