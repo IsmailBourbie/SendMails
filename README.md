@@ -1,2 +1,3 @@
 ﻿# Send Mails
-simple application to send mails automaticaly
+
+simple application to send mails automatically

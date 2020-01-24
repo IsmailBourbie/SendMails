@@ -1,14 +1,18 @@
 <?php
+
 namespace Core;
-Class Request {
-    
+
+class Request
+{
+
 
     /**
      * get the requested url removing the last '/'
      * @static
      * @return string
      */
-    public static function url() {
+    public static function url()
+    {
         $url = rtrim($_SERVER['QUERY_STRING'], '/');
 
         return self::removeQueryStringVar($url);
@@ -22,10 +26,11 @@ Class Request {
      * @param string $url
      * @return string
      */
-    private static function removeQueryStringVar($url) {
-        if($url != '') {
+    private static function removeQueryStringVar($url)
+    {
+        if ($url != '') {
             $parts = explode('&', $url, 2);
-            if(strpos($parts[0], "=") === false) {
+            if (strpos($parts[0], "=") === false) {
                 $url = $parts[0];
             } else {
                 $url = '';
@@ -39,7 +44,8 @@ Class Request {
      * @static
      * @return string
      */
-    public static function method() {
+    public static function method()
+    {
         return $_SERVER['REQUEST_METHOD'];
     }
 
@@ -47,7 +53,8 @@ Class Request {
      * get data from $_POST 
      * @return array $_POST
      */
-    public static function post() {
+    public static function post()
+    {
         return filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-      }
+    }
 }

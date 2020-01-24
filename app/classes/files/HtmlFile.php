@@ -4,7 +4,8 @@ namespace App\Classes\Files;
 
 use App\Classes\File;
 
-class HtmlFile extends File implements FileWithContent {
+class HtmlFile extends File implements FileWithContent
+{
     /**
      * the authorized extensions of this files
      * @var array validExtensions
@@ -20,13 +21,13 @@ class HtmlFile extends File implements FileWithContent {
         parent::__construct($file);
         $this->validExtension = self::VALID_EXTENSIONS;
     }
-    
+
     /**
      * overrated content method
      * @return array
      */
     public function content()
-    {        
+    {
         return file_get_contents($this->filepath);
     }
 }

@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Classes\Files;
+
 use App\Classes\File;
-class JsonFile extends File implements FileWithContent{
+
+class JsonFile extends File implements FileWithContent
+{
     /**
      * the authorized extensions of this files
      * @var array validExtensions

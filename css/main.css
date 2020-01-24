@@ -2,7 +2,7 @@
   background: #222831;
 }
 .navbar-brand {
-    color: #00adb5 !important;
+  color: #00adb5 !important;
 }
 
 .main-form {
@@ -35,7 +35,7 @@ form .body-title {
 }
 
 .container header > h1 {
-  font-family: 'Source Serif Pro', serif;
-    font-size: 30px;
-    font-weight: bold;
+  font-family: "Source Serif Pro", serif;
+  font-size: 30px;
+  font-weight: bold;
 }

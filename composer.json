@@ -5,7 +5,7 @@
       "App\\": "app/"
     }
   },
-    "require": {
-        "phpmailer/phpmailer": "^6.0"
-    }
+  "require": {
+    "phpmailer/phpmailer": "^6.0"
+  }
 }

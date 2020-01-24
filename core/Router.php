@@ -1,4 +1,5 @@
 <?php
+
 namespace Core;
 
 
@@ -27,7 +28,7 @@ class Router
      * @param strinf $file
      * @return object $router
      */
-    public static function load ($file)
+    public static function load($file)
     {
         $router = new static;
         require $file;
@@ -37,16 +38,14 @@ class Router
     /**
      * direct the url to relative controller
      * @param string $url
-     * @throws \Exeption
+     * @throws \Exception
      */
     public function direct($url)
     {
-        if(array_key_exists($url, $this->routes)) {
+        if (array_key_exists($url, $this->routes)) {
             require "app/controllers/{$this->routes[$url]}";
         } else {
             die("No file found for this uri: $url");
-            
         }
     }
-
 }

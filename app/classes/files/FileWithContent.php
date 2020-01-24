@@ -2,7 +2,8 @@
 
 namespace App\Classes\Files;
 
-interface FileWithContent {
+interface FileWithContent
+{
 
     /**
      * get the content of file

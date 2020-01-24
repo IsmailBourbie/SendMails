@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Classes\Files;
+
 use App\Classes\File;
 
-class ImageFile extends File {
+class ImageFile extends File
+{
     /**
      * the authorized extensions of this files
      * @var array validExtensions
@@ -19,5 +21,4 @@ class ImageFile extends File {
         parent::__construct($file);
         $this->validExtension = self::VALID_EXTENSIONS;
     }
-    
 }

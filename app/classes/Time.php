@@ -1,6 +1,9 @@
 <?php
+
 namespace App\Classes;
-class Time {
+
+class Time
+{
 
     /**
      * the time of start doing something
@@ -20,13 +23,15 @@ class Time {
     /**
      * saving the timestamp of the beginig
      */
-    public function start() {
+    public function start()
+    {
         $this->begin = microtime(true);
     }
     /**
      * saving the timestamp of the finish
      */
-    public function finish() {
+    public function finish()
+    {
         $this->end = microtime(true);
     }
 
@@ -34,9 +39,8 @@ class Time {
      * calcultaing the time used 
      * @return float
      */
-    public function spent_time() {
+    public function spent_time()
+    {
         return $this->end - $this->begin;
     }
-
-
 }
