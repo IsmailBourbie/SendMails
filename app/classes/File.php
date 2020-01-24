@@ -50,14 +50,13 @@ abstract class File
 
         public function __construct($file)
         {
-                $path = 'workspace/' . $file;
-                if ($this->isExists($path)) {
+                if ($this->isExists($file)) {
                         $file_parts = pathinfo($file);
                         $this->dirname = $file_parts['dirname'];
                         $this->basename = $file_parts['basename'];
                         $this->filename = $file_parts['filename'];
                         $this->extension = $file_parts['extension'];
-                        $this->filepath = 'workspace/' . $this->dirname . '/' . $this->basename;
+                        $this->filepath =  $this->dirname . '/' . $this->basename;
                 }
         }
 
