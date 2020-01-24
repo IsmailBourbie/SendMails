@@ -23,7 +23,7 @@
     </nav>
     <div class="container">
       <header class="text-center">
-        <h1 class="lead">Send mails to multiple adresses automaticaly</h1>
+        <h1 class="lead">Send mails to multiple addresses automatically</h1>
       </header>
       <form class="main-form" autocomplete="off" method="post" action="app/index.php">
         <!-- Sender input start  -->
@@ -58,7 +58,7 @@
               </div>
               <div class="col-lg-8 inline">
                 <input id="receivers_inline" name="receivers_inline" type="email" class="form-control" placeholder="e.g: bourbie@gmail.com"  multiple>
-                <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="you can use multiple adresses by using <,> as separations"></span>
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="you can use multiple addresses by using <,> as separations"></span>
               </div>
               <div class="col-lg-8 file" style="display : none">
                 <input id="receivers_file" name="receivers" type="text" class="form-control tempName" placeholder="e.g: TempName/file.json">

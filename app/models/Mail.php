@@ -53,12 +53,12 @@ class Mail {
       * @param array $body
       *
       */
-    public function __construct($recipients, $body, $sender, $attachements, $imageDir) {
+    public function __construct($recipients, $body, $sender, $attachments, $imageDir) {
         $this->mailer = new PHPMailer(true);
         $this->checkRecipients($recipients);
         $this->sender = $sender;
         $this->body = $body;
-        $this->attachements = $attachements;
+        $this->attachments = $attachments;
         $this->imageDir = $imageDir;
     }
 
@@ -79,9 +79,9 @@ class Mail {
 
     /**
      * setup recipients of the mail
-     * @param Array $recipients informations stord as an array of email=>name
-     * @param string $repleyTo_email 
-     * @param string $repleyTo_name 
+     * @param Array $recipients information stored as an array of email=>name
+     * @param string $replyTo_email 
+     * @param string $replyTo_name 
      */
     private function setup_recipients ($email, $name) {
             if(trim($name) != "" && !is_null(trim($name))) {
@@ -140,8 +140,8 @@ class Mail {
      * @param string $message
      * @param array $recipient
      * @param string $replacedKeys : has all the keys separated with ','
-     * @param strinf $hasReplacedText: by default is false
-     * @return bool $message: after relace keys with values
+     * @param string $hasReplacedText: by default is false
+     * @return bool $message: after replace keys with values
      */
     private function setupReplacedText($message, $recipient, $replacedKeys, $hasReplacedText = 'false') {
         if($hasReplacedText == 'true') {
@@ -155,14 +155,14 @@ class Mail {
         return $message;
     }
 
-    public function setup_attachements() {        
-        $attachements = $this->attachements;
+    public function setup_attachments() {        
+        $attachments = $this->attachments;
 
-        if($attachements['hasAttachements'] == 'true') {
-            $attachementsFiles = $attachements['attachementsFiles'];
-            $folder = implode('/', explode('/', $attachementsFiles, -1));
+        if($attachments['hasAttachments'] == 'true') {
+            $attachmentsFiles = $attachments['attachmentsFiles'];
+            $folder = implode('/', explode('/', $attachmentsFiles, -1));
             $folder = $folder !== "" ? $folder . "/" : "";
-            $parts = explode('/', $attachementsFiles);
+            $parts = explode('/', $attachmentsFiles);
             $files = explode(',', end($parts));        
             foreach($files as $file) {
                 $path = 'workspace/' . $folder.''.$file;
@@ -198,7 +198,7 @@ class Mail {
 
         ];        
         $this->mailer->setFrom($this->sender['email'], $this->sender['name']);
-        $this->setup_attachements();
+        $this->setup_attachments();
         $this->setup_images();
         foreach($this->recipients as $recipient) {
             $email = $recipient['email'];
@@ -221,7 +221,7 @@ class Mail {
     }
 
     /**
-     * Check reciptions if it's file or inline
+     * Check recipients if it's file or inline
      * @param array $recipients
      */
     private function checkRecipients(Array $recipients) {

@@ -36,9 +36,9 @@ $(document).ready(function() {
             "replacedKeys":""
           }
         },
-        "attachements": {
-          "hasAttachements": $('input[name=hasAttachment]:checked', 'form.main-form').val().trim(),
-          "attachementsFiles": ""
+        "attachments": {
+          "hasAttachments": $('input[name=hasAttachment]:checked', 'form.main-form').val().trim(),
+          "attachmentsFiles": ""
         }
       };
       // check for receivers type
@@ -69,11 +69,11 @@ $(document).ready(function() {
         formData.body.configuration.replacedKeys = ""
       }
 
-      // check for attachements type
-      if(formData.attachements.hasAttachements == "true") {
-        formData.attachements.attachementsFiles = $('#attachment_file').val().trim();
-      } else if(formData.attachements.hasAttachements == "false") {
-        formData.attachements.attachementsFiles = "";
+      // check for attachments type
+      if(formData.attachments.hasAttachments == "true") {
+        formData.attachments.attachmentsFiles = $('#attachment_file').val().trim();
+      } else if(formData.attachments.hasAttachments == "false") {
+        formData.attachments.attachmentsFiles = "";
       }
       console.log(formData);
       
@@ -125,7 +125,7 @@ $(document).ready(function() {
       }
     });
 
-    // add template names to the inputes
+    // add template names to the inputs
     $('.tempName').blur(function () {
     var inputVal = this.value.replace(/\\+/g, '/').replace(/\/+/g, '/'),
         endOfStr = this.value.indexOf('/') === -1 ? this.value.length - 1 : this.value.indexOf('/');

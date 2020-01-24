@@ -13,11 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
   // header('Location: /sendMails');
 }
 $inputs = Request::post();
-
+// die(var_dump($inputs));
 $s = $inputs['sender'];
 $r = $inputs['receivers'];
 $b = $inputs['body'];
-$a = $inputs['attachements'];
+$a = $inputs['attachments'];
 $i = $inputs['body']['configuration']['images'];
 $config = [
   'host' => "smtp.gmail.com",
@@ -27,16 +27,16 @@ $config = [
   'port' => 465,
 ];
 
-// $mail = new Mail($r, $b, $s, $a, $i);
-// $mail->setup_images($i);
-// $time = new Time();
-$i = 'test/images/tc.png';
-$file = new ImageFile($i);
-die(var_dump($file->content()));
-// $time->start();
-// $mail->setup_config($config);
-// $tracing = $mail->sendAll();
-// $time->finish();
+$mail = new Mail($r, $b, $s, $a, $i);
+$mail->setup_images($i);
+$time = new Time();
+// $i = 'test/test.json';
+// $file = new JsonFile($i);
+// die(var_dump($file->content()));
+$time->start();
+$mail->setup_config($config);
+$tracing = $mail->sendAll();
+$time->finish();
 
 $response = [
   'status' => 200,
