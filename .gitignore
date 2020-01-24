@@ -1,3 +1,5 @@
 vendor/*
 workspace/test/images/*
+workspace/test/attachments/*
 !workspace/test/images/README.md
+!workspace/test/attachments/README.md

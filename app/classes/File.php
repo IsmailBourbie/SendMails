@@ -79,7 +79,7 @@ abstract class File
         {
                 return in_array($this->extension, $this->validExtension);
         }
-        
+
         /**
          * get valid extensions
          * @return array 
@@ -87,6 +87,18 @@ abstract class File
         public function getValidExtension()
         {
                 return $this->validExtension;
+        }
+
+        /**
+         * static method to get all files from directory
+         * @static 
+         * @param string $path
+         * @return array of files
+         */
+        public static function readFromDirectory($directory)
+        {
+                $filesNames = array_diff(scandir($directory), array('.', '..'));
+                return $filesNames;
         }
 
 
@@ -134,7 +146,7 @@ abstract class File
          * Get $filepath
          *
          * @return  string
-         */ 
+         */
         public function getFilepath()
         {
                 return $this->filepath;

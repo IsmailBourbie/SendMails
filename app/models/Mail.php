@@ -4,6 +4,7 @@ namespace App\Models;
 // Import PHPMailer classes into the global namespace
 // These must be at the top of your script, not inside a function
 
+use App\Classes\File;
 use App\Classes\Files\AttachmentFile;
 use App\Classes\Files\ImageFile;
 use App\Classes\Helper;
@@ -48,7 +49,7 @@ class Mail
      * @var array
      * @access private
      */
-    private $imageDir;
+    private $imagesConfig;
 
     /**
      * Constructor of Mail Class
@@ -56,14 +57,14 @@ class Mail
      * @param array $body
      *
      */
-    public function __construct($recipients, $body, $sender, $attachments, $imageDir)
+    public function __construct($recipients, $body, $sender, $attachments, $imagesConfig)
     {
         $this->mailer = new PHPMailer(true);
         $this->checkRecipients($recipients);
         $this->sender = $sender;
         $this->body = $body;
         $this->attachments = $attachments;
-        $this->imageDir = $imageDir;
+        $this->imagesConfig = $imagesConfig;
     }
 
 
@@ -135,11 +136,11 @@ class Mail
     private function setup_configuration($message, $config, $recipient)
     {
         // setup images
-        if ($config['hasImages'] == 'true') {
-            // $this->setup_images($config['images']);
+        if ($config['images']['hasImages'] == 'true') {
+            $this->setup_images($config['images']['path']);
         }
 
-        $message = $this->setupReplacedText($message, $recipient, $config['replacedKeys'], $config['hasReplacedText']);
+        $message = $this->setupReplacedText($message, $recipient, $config['replacedText']);
 
         return $message;
     }
@@ -148,15 +149,13 @@ class Mail
      * replace keys with their values from json file
      * @param string $message
      * @param array $recipient
-     * @param string $replacedKeys : has all the keys separated with ','
-     * @param string $hasReplacedText: by default is false
      * @return bool $message: after replace keys with values
      */
-    private function setupReplacedText($message, $recipient, $replacedKeys, $hasReplacedText = 'false')
+    private function setupReplacedText($message, $recipient, $config)
     {
-        if ($hasReplacedText == 'true') {
-            $replacedKeys = explode(',', $replacedKeys);
-            foreach ($replacedKeys as $replacedKey) {
+        if ($config['hasReplacedText'] == 'true') {
+            $keys = explode(',', $config['keys']);
+            foreach ($keys as $replacedKey) {
                 $search = "%" . $replacedKey . "%";
                 $replace = $recipient[$replacedKey];
                 $message = str_replace($search, $replace, $message);
@@ -170,38 +169,37 @@ class Mail
         $attachments = $this->attachments;
 
         if ($attachments['hasAttachments'] == 'true') {
-            $attachmentsFiles = $attachments['attachmentsFiles'];
-            $folder = implode('/', explode('/', $attachmentsFiles, -1));
-            $dir = 'workspace/' . $folder;
-            $parts = explode('/', $attachmentsFiles);
-            $files = explode(',', end($parts));
-            array_map(function ($filename) use ($dir) {
-                $path = $dir . '/' . $filename;
+            $dirPath = 'workspace/' . $attachments['attachmentsFiles'];
+            $attachments = File::readFromDirectory($dirPath);
+            array_map(function ($filename) use ($dirPath) {
+                $path = $dirPath . '/' . $filename;
                 $attachment =  new AttachmentFile($path);
                 if ($attachment->isValid()) {
-                    $this->mailer->addAttachment($attachment->getFilepath(), $attachment->getBasename());
+                    $this->mailer->addAttachment(
+                        $attachment->getFilepath(),
+                        $attachment->getBasename()
+                    );
                 }
-            }, $files);
+            }, $attachments);
         }
     }
 
 
-    public function setup_images()
+    private function setup_images($path)
     {
-        $dir = 'workspace/' . $this->imageDir;
-        $files = array_diff(scandir($dir), array('.', '..'));
-        $images = array_map(function ($file) use ($dir) {
-            $path = $dir . '/' . $file;
-            return new ImageFile($path);
-        }, $files);
-        foreach ($images as $image) {
+        $dirPath = 'workspace/' . $path;
+        $images = File::readFromDirectory($dirPath);
+        array_map(function ($filename) use ($dirPath) {
+            $path = $dirPath . '/' . $filename;
+            $image =  new ImageFile($path);
             if ($image->isValid()) {
-                $path = $image->getFilepath();
-                $name = $image->getBasename();
-                $cid = $image->getFilename();
-                $this->mailer->AddEmbeddedImage($path, $cid, $name);
+                $this->mailer->AddEmbeddedImage(
+                    $image->getFilepath(),
+                    $image->getFilename(),
+                    $image->getBasename()
+                );
             }
-        }
+        }, $images);
     }
     public function sendAll()
     {
@@ -212,7 +210,6 @@ class Mail
         ];
         $this->mailer->setFrom($this->sender['email'], $this->sender['name']);
         $this->setup_attachments();
-        $this->setup_images();
         foreach ($this->recipients as $recipient) {
             $email = $recipient['email'];
             $name = $recipient['name'];

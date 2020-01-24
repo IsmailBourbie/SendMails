@@ -28,7 +28,7 @@ $config = [
 ];
 
 $mail = new Mail($r, $b, $s, $a, $i);
-$mail->setup_images($i);
+// $mail->setup_images($i);
 $time = new Time();
 // $i = 'test/test.json';
 // $file = new JsonFile($i);
