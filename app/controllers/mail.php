@@ -13,12 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
   // header('Location: /sendMails');
 }
 $inputs = Request::post();
-// die(var_dump($inputs));
-$s = $inputs['sender'];
-$r = $inputs['receivers'];
-$b = $inputs['body'];
-$a = $inputs['attachments'];
-$i = $inputs['body']['configuration']['images'];
+$senderInput = $inputs['sender'];
+$recipientsInput = $inputs['receivers'];
+$contentInput = $inputs['body'];
+$attachmentsInput = $inputs['attachments'];
 $config = [
   'host' => "smtp.gmail.com",
   'username' => "jami3atyapp@gmail.com",
@@ -26,13 +24,14 @@ $config = [
   'SMTPSecure' => "ssl",
   'port' => 465,
 ];
-
-$mail = new Mail($r, $b, $s, $a, $i);
-// $mail->setup_images($i);
+// die(var_dump($inputs));
+$mail = new Mail(
+  $senderInput,
+  $recipientsInput,
+  $contentInput,
+  $attachmentsInput
+);
 $time = new Time();
-// $i = 'test/test.json';
-// $file = new JsonFile($i);
-// die(var_dump($file->content()));
 $time->start();
 $mail->setup_config($config);
 $tracing = $mail->sendAll();

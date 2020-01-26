@@ -24,7 +24,7 @@ class Mail
     private $mailer;
 
     /**
-     * Array of recipients
+     * Array of sender information
      * @var array
      * @access private
      */
@@ -38,18 +38,18 @@ class Mail
     private $recipients;
 
     /**
-     * Array of recipients
+     * Array of body information
      * @var array
      * @access private
      */
     private $body;
 
     /**
-     * Array of recipients
+     * Array of attachments
      * @var array
      * @access private
      */
-    private $imagesConfig;
+    private $attachments;
 
     /**
      * Constructor of Mail Class
@@ -57,14 +57,13 @@ class Mail
      * @param array $body
      *
      */
-    public function __construct($recipients, $body, $sender, $attachments, $imagesConfig)
+    public function __construct($sender, $recipients, $body, $attachments)
     {
         $this->mailer = new PHPMailer(true);
         $this->checkRecipients($recipients);
         $this->sender = $sender;
         $this->body = $body;
         $this->attachments = $attachments;
-        $this->imagesConfig = $imagesConfig;
     }
 
 
@@ -105,7 +104,15 @@ class Mail
     {
         $this->mailer->isHTML(true);                                  // Set email format to HTML
         $this->mailer->Subject = $body['subject'];
-        $this->mailer->Body    = $this->setup_body($body['type'], $body['data'], $body['configuration'], $recipient);
+        $type                  = $body['type'];
+        $messageContent        = $body['data'];
+        $config                = $body['configuration'];
+        $this->mailer->Body    = $this->setup_body(
+            $type,
+            $messageContent,
+            $config,
+            $recipient
+        );
         $this->mailer->AltBody = 'This is the body in plain text for non-HTML mail clients';
     }
 
@@ -116,12 +123,12 @@ class Mail
      * @param Array $config 
      * @return String $message
      */
-    private function setup_body($type, $data, $config, $recipient)
+    private function setup_body($type, $messageContent, $config, $recipient)
     {
         if ($type === 'inline') {
-            $message = $data;
+            $message = $messageContent;
         } else if ($type === 'file') {
-            $file = 'workspace/' . $data;
+            $file = 'workspace/' . $messageContent;
             $message = file_get_contents($file);
             $message = $this->setup_configuration($message, $config, $recipient);
         }
