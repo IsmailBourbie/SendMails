@@ -4,7 +4,7 @@ namespace App\Classes\Files;
 
 use App\Classes\File;
 
-class AttachmentFile extends File
+class Attachment extends File
 {
     /**
      * the authorized extensions of this files

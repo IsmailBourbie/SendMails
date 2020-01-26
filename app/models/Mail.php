@@ -5,9 +5,9 @@ namespace App\Models;
 // These must be at the top of your script, not inside a function
 
 use App\Classes\File;
-use App\Classes\Files\AttachmentFile;
-use App\Classes\Files\HtmlFile;
-use App\Classes\Files\ImageFile;
+use App\Classes\Files\Attachment;
+use App\Classes\Files\Html;
+use App\Classes\Files\Image;
 use App\Classes\Helper;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -130,7 +130,7 @@ class Mail
             $message = $messageContent;
         } else if ($type === 'file') {
             $file = 'workspace/' . $messageContent;
-            $html = new HtmlFile($file);
+            $html = new Html($file);
             if ($html->isValid()) {
                 $message = $html->content();
                 $message = $this->setup_configuration(
@@ -188,7 +188,7 @@ class Mail
             $attachments = File::readFromDirectory($dirPath);
             array_map(function ($filename) use ($dirPath) {
                 $path = $dirPath . '/' . $filename;
-                $attachment =  new AttachmentFile($path);
+                $attachment =  new Attachment($path);
                 if ($attachment->isValid()) {
                     $this->mailer->addAttachment(
                         $attachment->getFilepath(),
@@ -206,7 +206,7 @@ class Mail
         $images = File::readFromDirectory($dirPath);
         array_map(function ($filename) use ($dirPath) {
             $path = $dirPath . '/' . $filename;
-            $image =  new ImageFile($path);
+            $image =  new Image($path);
             if ($image->isValid()) {
                 $this->mailer->AddEmbeddedImage(
                     $image->getFilepath(),

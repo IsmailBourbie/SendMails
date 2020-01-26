@@ -4,13 +4,13 @@ namespace App\Classes\Files;
 
 use App\Classes\File;
 
-class ImageFile extends File
+class Html extends File implements FileWithContent
 {
     /**
      * the authorized extensions of this files
      * @var array validExtensions
      */
-    const VALID_EXTENSIONS = ['png', 'jpeg', 'jpg', 'gif'];
+    const VALID_EXTENSIONS = ['htm', 'html'];
 
 
     /**
@@ -20,5 +20,14 @@ class ImageFile extends File
     {
         parent::__construct($file);
         $this->validExtension = self::VALID_EXTENSIONS;
+    }
+
+    /**
+     * overrated content method
+     * @return array
+     */
+    public function content()
+    {
+        return file_get_contents($this->filepath);
     }
 }
