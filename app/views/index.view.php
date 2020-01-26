@@ -103,8 +103,8 @@
             <input type="radio" id="yes" value="true" name="hasAttachment"> <label for="yes"> Yes</label>
           </div>
           <div class="col-lg-8" style="display: none">
-            <input id="attachment_file" name="attachment_file" type="text" class="form-control tempName" placeholder="e.g: TempName/file.pdf">
-            <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Use <,> to separate between files"></span>
+            <input id="attachment_file" name="attachment_file" type="text" class="form-control tempName" placeholder="Enter directory name: ">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="All files in this directory are included"></span>
           </div>
         </div>
       </div>
