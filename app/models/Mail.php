@@ -8,6 +8,7 @@ use App\Classes\File;
 use App\Classes\Files\Attachment;
 use App\Classes\Files\Html;
 use App\Classes\Files\Image;
+use App\Classes\Files\Json;
 use App\Classes\Helper;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -254,7 +255,10 @@ class Mail
     {
         if ($recipients['type'] === 'file') {
             $file = 'workspace/' . $recipients['data'];
-            $this->recipients = json_decode(file_get_contents($file), true);
+            $jsonFile = new Json($file);
+            if ($jsonFile->isValid()) {
+                $this->recipients = $jsonFile->content();
+            }
         } elseif ($recipients['type'] === 'inline') {
             $recipients = explode(',', $recipients['data']);
             $this->recipients = $this->formatRecipients($recipients);
