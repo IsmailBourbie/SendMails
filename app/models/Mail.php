@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Classes\File;
 use App\Classes\Files\AttachmentFile;
+use App\Classes\Files\HtmlFile;
 use App\Classes\Files\ImageFile;
 use App\Classes\Helper;
 use PHPMailer\PHPMailer\Exception;
@@ -129,8 +130,15 @@ class Mail
             $message = $messageContent;
         } else if ($type === 'file') {
             $file = 'workspace/' . $messageContent;
-            $message = file_get_contents($file);
-            $message = $this->setup_configuration($message, $config, $recipient);
+            $html = new HtmlFile($file);
+            if ($html->isValid()) {
+                $message = $html->content();
+                $message = $this->setup_configuration(
+                    $message,
+                    $config,
+                    $recipient
+                );
+            }
         }
         return $message;
     }
